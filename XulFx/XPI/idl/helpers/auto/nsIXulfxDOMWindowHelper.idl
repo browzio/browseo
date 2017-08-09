@@ -1,0 +1,191 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#include "domstubs.idl"
+
+interface nsIFrameRequestCallback;
+interface nsIControllers;
+interface nsIDOMBlob;
+interface nsIDOMLocation;
+interface nsIDOMOfflineResourceList;
+interface nsIPrompt;
+interface nsISelection;
+interface nsIVariant;
+interface mozIDOMWindowProxy;
+interface nsIDOMWindowCollection;
+interface mozIDOMWindow;
+
+/**
+* The nsIXulfxDOMWindowHelper interface is the helper interface for
+* a DOM window object. It represents a single window object that may
+* contain child windows if the document in the window contains a
+* HTML frameset document or if the document contains iframe elements.
+*
+* @see <http://www.whatwg.org/html/#window>
+*/
+[scriptable, uuid(d4ca3904-1f02-11e7-93ae-92361f002671)]
+interface nsIXulfxDOMWindowHelper : nsISupports
+{
+    void                    init(in mozIDOMWindowProxy window);
+    void                    setCursor(in DOMString cursor);
+    void                    sizeToContent();
+    void                    updateCommands(in DOMString action,
+                                [optional] in nsISelection sel,
+                                [optional] in short reason);
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return this.instance
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute   mozIDOMWindowProxy          realInstance;
+    %{C++
+    /* #JavaScript#
+    #get#
+        return this.instance
+    #get#
+    #JavaScript# */
+    %}
+	readonly    attribute   mozIDOMWindow               mozWindow;
+    readonly    attribute   nsIDOMEventTarget           windowRoot;
+    readonly    attribute   unsigned long long          mozPaintCount;
+    readonly    attribute   nsISupports                 controllers;
+
+
+    readonly    attribute   mozIDOMWindowProxy          window;
+    readonly    attribute   mozIDOMWindowProxy          self;
+    readonly    attribute   nsIDOMDocument              document;
+                attribute   DOMString                   name;
+    readonly    attribute   nsIDOMLocation              location;
+    readonly    attribute   nsISupports                 history;
+    readonly    attribute   nsISupports                 locationbar;
+    readonly    attribute   nsISupports                 menubar;
+    readonly    attribute   nsISupports                 personalbar;
+    readonly    attribute   nsISupports                 scrollbars;
+    readonly    attribute   nsISupports                 statusbar;
+    readonly    attribute   nsISupports                 toolbar;
+                attribute   DOMString                   status;
+    readonly    attribute   unsigned long               length;
+    readonly    attribute   mozIDOMWindowProxy          top;
+    readonly    attribute   mozIDOMWindowProxy          parent;
+                attribute   mozIDOMWindowProxy          opener;
+    readonly    attribute   nsIDOMElement               frameElement;
+    readonly    attribute   nsISupports                 navigator;
+    readonly    attribute   nsIDOMOfflineResourceList   applicationCache;
+    readonly    attribute   nsISupports                 sessionStorage;
+    readonly    attribute   nsISupports                 localStorage;
+    readonly    attribute   nsISupports                 indexedDB;
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return new XulfxDOMWindowCollection(this.instance.frames)
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute   nsIDOMWindowCollection      frames;
+
+    readonly    attribute   mozIDOMWindowProxy          content;
+    readonly    attribute   boolean                     closed;
+                attribute   boolean                     fullScreen;
+    readonly    attribute   nsIDOMScreen                screen;
+                attribute   long                        screenX;
+                attribute   long                        screenY;
+    readonly    attribute   long                        scrollX;
+    readonly    attribute   long                        scrollY;
+    readonly    attribute   long                        scrollMaxX;
+    readonly    attribute   long                        scrollMaxY;
+    readonly    attribute   long                        pageXOffset;
+    readonly    attribute   long                        pageYOffset;
+                attribute   long                        innerWidth;
+                attribute   long                        innerHeight;
+                attribute   long                        outerWidth;
+                attribute   long                        outerHeight;
+    readonly    attribute   float                       mozInnerScreenX;
+    readonly    attribute   float                       mozInnerScreenY;
+    readonly    attribute   float                       devicePixelRatio;
+
+    readonly    attribute   nsISupports                 console;
+    readonly    attribute   nsISupports                 performance;
+
+
+    void                    close();
+    void                    stop();
+    void                    focus();
+    void                    blur();
+
+    // user prompts
+    void                    alert([optional, Null(Stringify)] in DOMString text);
+    boolean                 confirm([optional] in DOMString text);
+
+    // prompt() should return a null string if cancel is pressed
+    DOMString               prompt([optional] in DOMString aMessage,
+                                [optional] in DOMString aInitial);
+    void                    print();
+
+    [optional_argc]
+    nsIVariant              showModalDialog(in DOMString aURI,
+                                [optional] in nsIVariant aArgs,
+                                [optional] in DOMString aOptions);
+
+    DOMString               atob(in DOMString aAsciiString);
+    DOMString               btoa(in DOMString aBase64Data);
+
+    nsISelection            getSelection();
+    nsISupports             matchMedia(in DOMString media_query_list);
+
+
+    void                    scroll(in long xScroll, in long yScroll);
+    void                    scrollTo(in long xScroll, in long yScroll);
+    void                    scrollBy(in long xScrollDif, in long yScrollDif);
+    void                    scrollByLines(in long numLines);
+    void                    scrollByPages(in long numPages);
+
+    nsIDOMCSSStyleDeclaration getComputedStyle(in nsIDOMElement elt,
+                                [optional] in DOMString pseudoElt);
+    nsIDOMCSSStyleDeclaration getDefaultComputedStyle(in nsIDOMElement elt,
+                                [optional] in DOMString pseudoElt);
+
+    void                    back();
+    void                    forward();
+    void                    home();
+    void                    moveTo(in long xPos, in long yPos);
+    void                    moveBy(in long xDif, in long yDif);
+    void                    resizeTo(in long width, in long height);
+    void                    resizeBy(in long widthDif, in long heightDif);
+    mozIDOMWindowProxy       open(in DOMString url, in DOMString name,
+                                in DOMString options);
+    mozIDOMWindowProxy       openDialog(in DOMString url, in DOMString name,
+                                in DOMString options,
+                                in nsISupports aExtraArgument);
+
+    boolean                 find([optional] in DOMString str,
+                                [optional] in boolean caseSensitive,
+                                [optional] in boolean backwards,
+                                [optional] in boolean wrapAround,
+                                [optional] in boolean wholeWord,
+                                [optional] in boolean searchInFrames,
+                                [optional] in boolean showDialog);
+
+};
+
+%{C++
+/* #JavaScript#
+function XulfxDOMWindowCollection(collection) {
+    this.windows = collection;
+}
+XulfxDOMWindowCollection.prototype = {
+    QueryInterface: XPCOMUtils.generateQI([Ci.nsIDOMWindowCollection]),
+    get length() { return this.windows.length },
+    item: function(index) { return this.windows[index] },
+    namedItem: function(name) { return this.windows[name] }
+}
+#JavaScript# */
+%}
+
+%{C++
+#define NS_XULFXDOMWINDOWHELPER_CONTRACTID "@xulfx/dom/window;1"
+%}

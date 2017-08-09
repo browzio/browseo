@@ -1,0 +1,128 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+* License, v. 2.0. If a copy of the MPL was not distributed with this
+* file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#include "domstubs.idl"
+
+interface nsIVariant;
+
+
+[scriptable, uuid(30694a49-c313-437b-b260-8b44b4401bd7)]
+interface nsIXulfxPerformanceTiming : nsISupports
+{
+    %{C++
+    /* #JavaScript#
+    #get#
+        this.instance = timing;
+        return this;
+    #get#
+    #JavaScript# */
+    %}
+    nsIXulfxPerformanceTiming init(in nsISupports timing);
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return this.instance
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute   nsISupports                realInstance;
+
+    readonly    attribute    unsigned long long         navigationStart;
+    readonly    attribute    unsigned long long         unloadEventStart;
+    readonly    attribute    unsigned long long         unloadEventEnd;
+    readonly    attribute    unsigned long long         redirectStart;
+    readonly    attribute    unsigned long long         redirectEnd;
+    readonly    attribute    unsigned long long         fetchStart;
+    readonly    attribute    unsigned long long         domainLookupStart;
+    readonly    attribute    unsigned long long         domainLookupEnd;
+    readonly    attribute    unsigned long long         connectStart;
+    readonly    attribute    unsigned long long         connectEnd;
+    readonly    attribute    unsigned long long         secureConnectionStart;
+    readonly    attribute    unsigned long long         requestStart;
+    readonly    attribute    unsigned long long         responseStart;
+    readonly    attribute    unsigned long long         responseEnd;
+    readonly    attribute    unsigned long long         domLoading;
+    readonly    attribute    unsigned long long         domInteractive;
+    readonly    attribute    unsigned long long         domContentLoadedEventStart;
+    readonly    attribute    unsigned long long         domContentLoadedEventEnd;
+    readonly    attribute    unsigned long long         domComplete;
+    readonly    attribute    unsigned long long         loadEventStart;
+    readonly    attribute    unsigned long long         loadEventEnd;
+};
+
+[scriptable, uuid(c0f3b402-85e9-47da-83ab-5774e54e732b)]
+interface nsIXulfxPerformanceNavigation : nsISupports
+{
+    %{C++
+    /* #JavaScript#
+    #get#
+        this.instance = navigation;
+        return this;
+    #get#
+    #JavaScript# */
+    %}
+    nsIXulfxPerformanceNavigation init(in nsISupports navigation);
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return this.instance
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute   nsISupports                realInstance;
+
+    readonly    attribute    unsigned short             type;
+    readonly    attribute    unsigned short             redirectCount;
+};
+
+[scriptable, uuid(11da6ba1-a4d9-46f2-9920-351a091cd099)]
+interface nsIXulfxWEBAPIPerfomanceHelper : nsISupports
+{
+    void                     init(in nsISupports perfomance);
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return this.instance
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute   nsISupports                realInstance;
+
+    %{C++
+    /* #JavaScript#
+    #get#
+        return new XulfxPerformanceTiming().init(this.instance.timing);
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute    nsIXulfxPerformanceTiming  timing;
+    %{C++
+    /* #JavaScript#
+    #get#
+        return new XulfxPerformanceNavigation().init(this.instance.navigation);
+    #get#
+    #JavaScript# */
+    %}
+    readonly    attribute    nsIXulfxPerformanceNavigation navigation;
+
+    double                   now();
+    void                     mark(in DOMString name);
+    void                     clearResourceTimings();
+    void                     setResourceTimingBufferSize(in unsigned long maxSize);
+
+    [optional_argc]
+    void                     measure(in DOMString measureName,
+                                 [optional] in DOMString startMarkName,
+                                 [optional] in DOMString endMarkName);
+
+
+};
+
+%{C++
+#define NS_XULFXPERFORMANCETIMING_CONTRACTID "@xulfx/webapi/perfomance-timing;1"
+#define NS_XULFXPERFORMANCENAVIGATION_CONTRACTID "@xulfx/webapi/perfomance-navigation;1"
+%}

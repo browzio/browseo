@@ -1,0 +1,12 @@
+component {0f38b318-1f03-11e7-93ae-92361f002671} generated/XulfxDOMWindowHelper.js
+contract @xulfx/dom/window;1 {0f38b318-1f03-11e7-93ae-92361f002671}
+
+component {c85aaf5d-7efd-4ec4-85f4-504c6c861357} generated/XulfxWEBAPIPerfomanceHelper.js
+contract @xulfx/webapi/perfomance-timing;1 {c85aaf5d-7efd-4ec4-85f4-504c6c861357}
+
+component {c20ee8e7-1360-4e88-872d-4e991fd3a003} generated/XulfxWEBAPIPerfomanceHelper.js
+contract @xulfx/webapi/perfomance-navigation;1 {c20ee8e7-1360-4e88-872d-4e991fd3a003}
+
+component {eb787633-0758-47fb-abf5-81c3bbf40e93} generated/XulfxWEBAPIPerfomanceHelper.js
+contract @xulfx/webapi/perfomance;1 {eb787633-0758-47fb-abf5-81c3bbf40e93}
+

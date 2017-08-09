@@ -1,0 +1,13 @@
+#include "domstubs.idl"
+
+interface nsIVariant;
+interface nsIStringEnumerator;
+
+[scriptable, uuid(97f56a0a-2f31-11e7-93ae-92361f002671)]
+interface nsIXulfxDictionary : nsISupports
+{
+    nsIStringEnumerator keys();
+    nsIVariant get(in DOMString aKey);
+    void set(in DOMString aKey, in nsIVariant aValue);
+    void remove(in DOMString aKey);
+};

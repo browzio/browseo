@@ -1,0 +1,13 @@
+#include "domstubs.idl"
+
+interface mozIDOMWindowProxy;
+interface nsIVariant;
+interface nsIXulfxDictionary;
+
+[scriptable, uuid(ae8ad3ce-2165-11e7-93ae-92361f002671)]
+interface nsIXulfxEventHelper : nsISupports
+{
+    void init(in mozIDOMWindowProxy aWindow);
+    nsIDOMEvent createEvent(in DOMString aType, in DOMString aName, [optional] in nsIVariant aInit);
+    nsIDOMEvent createEvent2(in DOMString aType, in DOMString aName, in nsIXulfxDictionary aInit);
+};

@@ -1,0 +1,3587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BA81C79-E01B-47FF-BB34-155A55BD85C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gecko</RootNamespace>
+    <AssemblyName>XulFx</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
+    <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
+    <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
+    <SccProvider>Mercurial Source Control Package</SccProvider>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Debug\XulFx.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Release\XulFx.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>xulfx.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cache\LoadContextInfo.cs" />
+    <Compile Include="Cache\LoadContextInfoFactory.cs" />
+    <Compile Include="DefaultTextInputProcessorCallback.cs" />
+    <Compile Include="DOM\Events\GeckoKeyboardEvent.cs" />
+    <Compile Include="DOM\Events\GeckoKeyboardEvent.KeyLocation.cs" />
+    <Compile Include="Events\XulfxEventInitDictionary.cs" />
+    <Compile Include="GeckoFocusFlags.cs" />
+    <Compile Include="GeckoInterfaces\Generated\amIAddonManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIDOMWindow.cs" />
+    <Compile Include="GeckoInterfaces\Generated\mozIMozIntl.cs" />
+    <Compile Include="GeckoInterfaces\Generated\mozIPlacesPendingOperation.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibilityService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIArrayExtensions.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowser.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIChannelWithDivertableParentListener.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIContentSignatureVerifier.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIDatePicker.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIDateTimeInputArea.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSKeyframeRule.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSKeyframesRule.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorUtils.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIFormPOSTActionChannel.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIFTPChannelParentInternal.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIGroupedSHistory.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIHstsPrimingCallback.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpAuthenticatorCallback.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIIdlePeriod.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsINamedPipeService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkInfoService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsINSSU2FToken.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPartialSHistory.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPartialSHistoryListener.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPerformanceStats.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPlatformInfo.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationControlService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationLocalDevice.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationSessionTransportBuilder.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationTerminateRequest.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPrinterEnumerator.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPushErrorReporter.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPushNotifier.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIPushService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIRequestContext.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISecurityReporter.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISocketFilter.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIThrottledInputChannel.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsITransportProvider.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIU2FToken.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIURIWithBlobImpl.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIURIWithQuery.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWellKnownOpportunisticUtils.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowlessBrowser.cs" />
+    <Compile Include="GeckoInterfaces\Generated\xpctest_utils.cs" />
+    <Compile Include="TagNameComparer.cs" />
+    <Compile Include="GeckoInterfaces\Generated\amIAddonPathService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\amIWebInstaller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\amIWebInstallListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\domstubs.cs" />
+    <Compile Include="GeckoInterfaces\Generated\extIApplication.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\IJSDebugger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgICache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIContainerDebug.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgILoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgINotificationObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIOnloadBlocker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgIScriptedNotificationObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\imgITools.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inICSSValueSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inIDeepTreeWalker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inIDOMUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inIDOMView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inISearchObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\inISearchProcess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\IPeerConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIApplication.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIApplicationClearPrivateDataParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIAsyncFavicons.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIAsyncHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIAsyncLivemarks.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIColorAnalyzer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIDownloadPlatform.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIGeckoMediaPluginChromeService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIGeckoMediaPluginService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIJSSubScriptLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIPersonalDictionary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIPlacesAutoComplete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozISpellCheckingEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozISpellI18NManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozISpellI18NUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageAggregateFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageAsyncConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageAsyncStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageBaseStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageBindingParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageBindingParamsArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageCompletionCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStoragePendingStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageProgressHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageResultSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageRow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageStatement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageStatementCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageStatementParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageStatementRow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageVacuumParticipant.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIStorageValueArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozIThirdPartyUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\mozITXTToHTMLConv.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\NotXPCOMTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsCDefaultURIFixup.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsCExternalHandlerService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsCURILoader.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsCWebBrowser.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsCWebBrowserPersist.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIAboutModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAboutNewTabService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessible.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleApplication.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleCaretMoveEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleEditableText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleHideEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleHyperLink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleHyperText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleImage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleObjectAttributeChangedEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessiblePivot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleRelation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleRole.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleSelectable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleStateChangeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleStates.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleTableChangeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleTextChangeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleTextRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAccessibleVirtualCursorChangeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAddonInterposition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAddonPolicyService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAlertsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAnnotationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIApplicationCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIApplicationCacheChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIApplicationCacheContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIApplicationCacheService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIApplicationReputation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAppShell.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAppShellService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAppsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAppStartup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIArrayBufferInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIASN1Object.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIASN1PrintableItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIASN1Sequence.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIASN1Tree.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAssociatedContentSecurity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncShutdown.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncStreamCopier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncStreamCopier2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAsyncVerifyRedirectCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAtom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAtomService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAudioChannelAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAudioChannelService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthInformation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthPrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthPrompt2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthPromptAdapterFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthPromptCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAuthPromptProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompleteController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompleteInput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompletePopup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompleteResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompleteSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoCompleteSimpleResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIAutoConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBackgroundFileSaver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBadCertListener2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBaseWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBFCacheEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBidiKeyboard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBinaryInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBinaryOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBlocklistService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserDOMWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserElementAPI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserGlue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserProfileMigrator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBrowserSearchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIBufferedStreams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIByteRangeRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheEntryDescriptor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheEntryDoomCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheEntryOpenCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheInfoChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheStorageService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheStorageVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheTesting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICacheVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICachingChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICancelable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICaptivePortalDetector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICaptivePortalService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICategoryManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICertBlocklist.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICertificateDialogs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICertOverrideService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICertTree.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIChannelEventSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIChildChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIChromeRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClassInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClassOfService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClientAuthDialogs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboardCommands.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboardDragDropHookList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboardDragDropHooks.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboardHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIClipboardOwner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICloneableInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICollation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIColorPicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandLine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandLineHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandLineRunner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandLineValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICommandParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIComponentManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIComponentRegistrar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICompressConvStats.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConsoleAPIStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConsoleListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConsoleMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConsoleService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContainerBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentDispatchChooser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentPermissionPrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentPolicyBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentPrefService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentPrefService2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentSecurityManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentSecurityPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentSniffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentURIGrouper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentViewer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentViewerContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentViewerEdit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContentViewerFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContextMenuListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIContextMenuListener2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIControllerCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIControllerCommandTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIControllerContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIControllers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConverterInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIConverterOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookie.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookie2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookieAcceptDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookieManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookieManager2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookiePermission.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookiePromptService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICookieService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICrashReporter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICrashService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICryptoFIPSInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICryptoHash.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICryptoHMAC.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICSSUnprefixingService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsICycleCollectorListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDashboard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDashboardEventNotifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDataSignatureVerifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDebug2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDeprecationWarner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDeviceSensors.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDialogParamBlock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDirectoryEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDirectoryService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDirIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDirIndexListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDiskSpaceWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDisplayInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDivertableChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDNSListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDNSRecord.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDNSService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDNSServiceDiscovery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocCharset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocShell.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocShellLoadInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocShellTreeItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocShellTreeOwner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocumentEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocumentLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocumentLoaderFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDocumentStateListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDomainPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMAnimationEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMAttr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMBeforeUnloadEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMBlob.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCanvasRenderingContext2D.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCDATASection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCharacterData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMChromeWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMClientRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMClientRectList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMClipboardEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCommandEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMComment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMConstructor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCounter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCrypto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSConditionRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSCounterStyleRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSFontFaceRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSFontFeatureValuesRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSGroupingRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSImportRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSMediaRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSMozDocumentRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSPageRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSPrimitiveValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSRuleList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSStyleDeclaration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSStyleRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSStyleSheet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSSupportsRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSUnknownRule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCSSValueList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMCustomEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDataChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDataContainerEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDataTransfer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDocumentFragment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDocumentType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDocumentXBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDOMCursor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDOMException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDOMImplementation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDOMRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMDragEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMEventListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMEventTarget.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMFileList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMFocusEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMFontFace.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMFontFaceList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMFormData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoGeolocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoPosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoPositionCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoPositionCoords.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoPositionError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGeoPositionErrorCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMGlobalPropertyInitializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLAnchorElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLAppletElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLAreaElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLBaseElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLBodyElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLButtonElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLCanvasElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLDirectoryElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLEmbedElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLFieldSetElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLFormElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLFrameElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLFrameSetElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLHeadElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLHRElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLHtmlElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLIFrameElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLInputElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLLabelElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLLIElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLLinkElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLMapElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLMediaElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLMenuElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLMenuItemElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLMetaElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLObjectElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLOListElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLOptGroupElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLOptionElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLOptionsCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLParagraphElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLPictureElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLPreElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLQuoteElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLScriptElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLSelectElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLSourceElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLStyleElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLTableCellElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLTextAreaElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMHTMLUListElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMKeyEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMLocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMediaList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMModalContentWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMouseEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMouseScrollEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMozBrowserFrame.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMozNamedAttrMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMMutationEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNavigator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNavigatorUserMedia.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNodeFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNodeIterator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNodeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNotifyPaintEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNSEditableElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMNSEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMOfflineResourceList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMPaintRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMProcessingInstruction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMRect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMScrollAreaEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMSimpleGestureEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMStorageManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMStyleSheet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMStyleSheetList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMSVGElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMSVGLength.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMTimeEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMTimeRanges.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMTransitionEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMTreeWalker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMUIEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMValidityState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWakeLockListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWebGLRenderingContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWheelEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWindowCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMWindowUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXMLDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXPathEvaluator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXPathResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULButtonElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULCheckboxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULCommandDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULCommandEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULContainerElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULControlElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULDescriptionElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULLabeledControlEl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULLabelElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULMenuListElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULMultSelectCntrlEl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULPopupElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULRelatedElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULSelectCntrlEl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULSelectCntrlItemEl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULTextboxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDOMXULTreeElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownload.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownloader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownloadHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownloadManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownloadManagerUI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDownloadProgressListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDragService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDragSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIDroppedLinkHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditActionListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditingSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorIMESupport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorMailSupport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorSpellCheck.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEditorStyleSheets.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEffectiveTLDService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEmbeddingSiteWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEncodedChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEntityConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEnvironment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIErrorService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEventListenerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIEventTarget.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExpatSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExtendedExpatSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExternalHelperAppService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExternalProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExternalProtocolService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExternalSharingAppService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIExternalURLHandlerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFaviconService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedElementBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedPerson.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedResultService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFeedTextConstruct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFileChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFilePicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFileProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFileStreams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFileURL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFinalizationWitnessService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFindService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFocusManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFontEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIForcePendingChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormatConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormAutoComplete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormAutofillContentService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormFillController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFormSubmitObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFrameLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFTPChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIFxAccountsUIGlue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGConfService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGenKeypairInfoDlg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGeolocationProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGfxInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGfxInfoDebug.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGIOService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGlobalHistory2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIGZFileWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHandlerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHangReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHapticFeedback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHashable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHelperAppLauncherDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLAbsPosEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLInlineTableEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLMenu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLObjectResizeListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTMLObjectResizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpActivityObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpAuthenticableChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpAuthenticator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpAuthManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpChannelAuthProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpChannelChild.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpChannelInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpEventSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTTPHeaderListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpHeaderVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHTTPIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpPushListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIHttpServer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIconURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIdentityCryptoService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIdleObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIdleService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIdleServiceInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIDNService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIImageDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIImageLoadingContent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIncrementalDownload.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIncrementalStreamLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIINIParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInlineSpellChecker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInputListAutoComplete.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInputStreamChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInputStreamPump.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInputStreamTee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInterfaceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInterfaceInfoManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIInterfaceRequestor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIOService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIOService2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIIOUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJARChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJARProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJARURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJSInspector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJSON.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJumpListBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIJumpListItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIKeygenThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIKeyModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILineInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIListBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoadContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoadContextInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoadGroup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoadGroupChild.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoadInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILocalCertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILocale.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILocaleService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILocalFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILocalFileWin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginManagerCrypto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginManagerPrompter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginManagerStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsILoginMetaInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMediaManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMemory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMemoryInfoDumper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMemoryProfiler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMemoryReporter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMenuBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMenuBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMessageLoop.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMessageManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMIMEHeaderParam.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMIMEInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMIMEInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMIMEService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMozBrowserFrame.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMozNavigatorNetwork.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMozSAXXMLDeclarationHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMultiPartChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMultiplexInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMutable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIMutableArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINativeAppSupport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINativeFileWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINativeOSFileInternals.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINavBookmarksService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINavHistoryService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINestedURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetAddr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkInterceptController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkLinkService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkPredictor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkPredictorVerifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINetworkProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINotificationStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINSSErrorsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINSSVersion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsINullChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIObjectInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIObjectLoadingContent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIObjectOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIObserverService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIOfflineCacheUpdate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIOSFileConstantsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPackageKitService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIParentalControlsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIParentChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIParentRedirectingChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIParserUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPermission.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPermissionManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPermissionPromptService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPersistentProperties2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPhonetic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPipe.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPK11Token.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPK11TokenDB.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPKCS11.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPKCS11Module.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPKCS11ModuleDB.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPKCS11Slot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPlaintextEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPluginDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPluginHost.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPluginInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPluginInstanceOwner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPluginTag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPopupWindowManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPowerManagerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefBranch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefBranch2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefBranchInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefetchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefLocalizedString.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrefService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationControlChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationDevice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationDeviceManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationDevicePrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationDeviceProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationRequestUIGlue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationSessionRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPresentationSessionTransport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrincipal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintingPromptService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintProgress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintProgressParams.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintSettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintSettingsWin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrintStatusFeedback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrivacyTransitionObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrivateBrowsingChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrivateBrowsingTrackingProtectionWhitelist.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIProcess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProfileMigrator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProfiler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProfileSaveEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProfileUnlocker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProgrammingLanguage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProgressEventSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPrompt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPromptFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPromptService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPromptService2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProperty.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPropertyBag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIPropertyBag2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtectedAuthThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtocolProxyCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtocolProxyFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtocolProxyService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProtocolProxyService2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProxiedChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProxiedProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIProxyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIQueryContentEventResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIQuotaCallbacks.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIQuotaManagerService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIQuotaRequests.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIRandomGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFCompositeDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFContainerUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFDelegateFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFInferDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFInMemoryDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFLiteral.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFPropagatableDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFPurgeableDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFRemoteDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFResource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFXMLParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFXMLSerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFXMLSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRDFXMLSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIReadConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRecoveryService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRedirectChannelRegistrar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRedirectResultListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIReflowObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRefreshURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRelativeFilePref.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRemoteBrowser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRemoteWindowContext.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRequestObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRequestObserverProxy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIResProtocolHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIResumableChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIRunnable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISafeOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISaveAsCharset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXContentHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXDTDHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXErrorHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXLexicalHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXLocator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXMutableAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXXMLFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISAXXMLReader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScreenManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableBase64Encoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableDateFormat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableRegion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableUConv.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptableUnescapeHTML.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptError.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptLoaderObserver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScriptSecurityManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScrollable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIScrollBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecCheckWrapChannel.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISecretDecoderRing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecureBrowserUI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecurityConsoleMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecurityEventSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecurityInfoProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISecurityUITelemetry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISeekableStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISelection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISelectionController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISelectionDisplay.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISelectionListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISelectionPrivate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISemanticUnitScanner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISensitiveInfoHiddenURI.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISerializable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISerializationHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIServerSocket.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIServiceManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIServiceWorkerManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISessionStartup.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISessionStore.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISettingsService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISHContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIShellService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISHEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISHistory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISHistoryInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISHistoryListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISHTransaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISimpleContentPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISimpleEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISimpleStreamListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISiteSecurityService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISiteSpecificUserAgent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISliderListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISlowScriptDebug.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISocketProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISocketProviderService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISocketTransport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISocketTransportService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISOCKSSocketInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISound.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISpeculativeConnect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISpeechRecognitionService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISpeechService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISSLSocketControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISSLStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISSLStatusProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStandardURL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStartupCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStatusReporter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStorageStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamBufferAccess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamConverterService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamingProtocolController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamingProtocolService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamListenerTee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStreamTransportService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStringBundle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStringBundleOverride.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStringEnumerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStringStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStructuredCloneContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIStyleSheetService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISubstitutingProtocolHandler.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsISupports.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISupportsArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISupportsIterators.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISupportsPrimitives.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISupportsPriority.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISyncJPAKE.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISyncStreamListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISynthVoiceRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISystemProxySettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsISystemUpdateProvider.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsITabChild.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITableEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITabParent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITabSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaggingService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarOverlayIconController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarPreview.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarPreviewButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarPreviewController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarProgress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarTabPreview.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITaskbarWindowPreview.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITCPSocketCallback.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsITelemetry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITextInputProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITextInputProcessorCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITextScroll.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITextServicesFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITextToSubURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThreadInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThreadManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThreadPool.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThreadRetargetableRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIThreadRetargetableStreamListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITimedChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITimer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITimeService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITLSServerSocket.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITokenDialogs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITokenPasswordDialogs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIToolkitChromeRegistry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIToolkitProfile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIToolkitProfileService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITooltipListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITooltipTextProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITraceableChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransactionList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransactionListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransactionManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransfer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransferable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITransportSecurityInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITreeBoxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITreeColumns.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITreeContentView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITreeSelection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITreeView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITXTToHTMLConv.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsITypeAheadFind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUDPSocket.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUDPSocketChild.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUnicharInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUnicharLineInputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUnicharOutputStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUnicharStreamLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUnicodeNormalizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUpdateService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUpdateTimerManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUploadChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUploadChannel2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURIClassifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURIContentListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURIFixup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURILoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURIRefObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURIWithPrincipal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlClassifierDBService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlClassifierHashCompleter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlClassifierPrefixSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlClassifierStreamUpdater.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlClassifierUtils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURLFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUrlListManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIURLParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUserInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUTF8ConverterService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIUUIDGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIVariant.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIVersionComparator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIViewSourceChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWeakCryptoOverride.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWeakReference.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserChrome.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserChrome2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserChrome3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserChromeFocus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserFind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserFocus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserPersist.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserPersistable.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserPersistDocument.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserPrint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebBrowserStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebContentConverterRegistrar.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWebContentHandlerRegistrar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebNavigation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebNavigationInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebPageDescriptor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebProgress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebProgressListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebProgressListener2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebSocketChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebSocketEventService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWebSocketListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebVTTListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWebVTTParserWrapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWifiAccessPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWifiListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWifiMonitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWinAppHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowCreator2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowMediator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowMediatorListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowsRegKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowsShellService.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowsUIUtils.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWindowWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWinTaskbar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWorkerDebugger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWorkerDebuggerManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWorkerTest.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsIWritablePropertyBag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWritablePropertyBag2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIWyciwygChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIX509Cert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIX509CertDB.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIX509CertList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIX509CertValidity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXBLAccessible.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXMLHttpRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXPConnect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXPCScriptable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXSLTProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXSLTProcessorPrivate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULAppInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULBrowserWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULBuilderListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULOverlayProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULRuntime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULSortService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULTemplateBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULTemplateQueryProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULTemplateResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULTemplateRuleFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIXULWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIZipReader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsIZipWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPICommandUpdater.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPIDNSService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPIEditorTransaction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPILoadGroupInternal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPIPlacesDatabase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPIPromptService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPISocketTransportService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nsPIWindowWatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\nspluginroot.cs" />
+    <Compile Include="GeckoInterfaces\Generated\nsrootidl.cs" />
+    <Compile Include="GeckoInterfaces\Generated\rdfIDataSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\rdfISerializer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\rdfITripleVisitor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\txIEXSLTRegExFunctions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\txIFunctionEvaluationContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\txINodeSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\txIXPathObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpccomponents.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpcexception.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpcIJSGetFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpcIJSModuleLoader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpcIJSWeakReference.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpcjsid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoInterfaces\Generated\xpctest_attributes.cs" />
+    <Compile Include="GeckoInterfaces\Generated\xpctest_bug809674.cs" />
+    <Compile Include="GeckoInterfaces\Generated\xpctest_interfaces.cs" />
+    <Compile Include="GeckoInterfaces\Generated\xpctest_params.cs" />
+    <Compile Include="GeckoInterfaces\Generated\xpctest_returncode.cs" />
+    <Compile Include="GeckoInterfaces\ThisCallCallingConventionAttribute.cs" />
+    <Compile Include="GeckoMoveFocusType.cs" />
+    <Compile Include="GeckoTextInputProcessor.cs" />
+    <Compile Include="Interop\MemoryPressureObserver.cs" />
+    <Compile Include="Interop\NsSupportsBase.cs" />
+    <Compile Include="IO\InputStreamAsyncResult.cs" />
+    <Compile Include="Javascript\Runnable.cs" />
+    <Compile Include="ReferrerPolicy.cs" />
+    <Compile Include="Services\FocusService.cs" />
+    <Compile Include="WebAPI\GeckoPerformanceNavigation.cs" />
+    <Compile Include="WebAPI\GeckoPerformanceTiming.cs" />
+    <Compile Include="WebAPI\GeckoPerformance.cs" />
+    <Compile Include="WebAPI\PerformanceNavigationType.cs" />
+    <Content Include="XPI\idl\nsIXulfxDictionary.idl" />
+    <Compile Include="XPI\Interfaces\Contracts.cs" />
+    <Compile Include="XPI\Interfaces\Helpers\nsIXulfxDOMWindowHelper.cs" />
+    <Compile Include="XPI\Interfaces\Helpers\nsIXulfxWEBAPIPerfomanceHelper.cs" />
+    <Compile Include="XPI\Interfaces\nsIXulfxCookieManager.cs" />
+    <Compile Include="XPI\Interfaces\nsIXulfxDictionary.cs" />
+    <Compile Include="XPI\Interfaces\nsIXulfxDOMXPathEvaluator.cs" />
+    <Compile Include="XPI\Interfaces\nsIXulfxEventHelper.cs" />
+    <Compile Include="XulfxAppInfo.cs" />
+    <Compile Include="Cache\CacheStorage.cs" />
+    <Compile Include="Cache\CacheStorageConsumptionObserverBase.cs" />
+    <Compile Include="Cache\CacheStorageService.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLMediaElement.cs" />
+    <Compile Include="DOM\NodeFilterFlags.cs" />
+    <Compile Include="DOM\GeckoTreeWalker.cs" />
+    <Compile Include="DownloadManager.cs" />
+    <Compile Include="BaseTypes\AccessibleTextBoundary.cs" />
+    <Compile Include="BaseTypes\gfxGraphicsFilter.cs" />
+    <Compile Include="BaseTypes\nscolor.cs" />
+    <Compile Include="BaseTypes\nsDirection.cs" />
+    <Compile Include="BaseTypes\PivotMoveReason.cs" />
+    <Compile Include="BaseTypes\ScrollAxis.cs" />
+    <Compile Include="BaseTypes\TextBoundaryType.cs" />
+    <Compile Include="BaseTypes\xpcContextCallback.cs" />
+    <Compile Include="BaseTypes\xpcGCCallback.cs" />
+    <Compile Include="Cache\ImageCacheService.cs" />
+    <Compile Include="ContextMenuInfo.cs" />
+    <Compile Include="ContextMenuUpdaterBase.cs" />
+    <Compile Include="ContextMenuHandlerBase.cs" />
+    <Compile Include="CustomMarshalers\ACStringMarshaler.cs" />
+    <Compile Include="CustomMarshalers\AStringMarshaler.cs" />
+    <Compile Include="CustomMarshalers\AUTF8StringMarshaler.cs" />
+    <Compile Include="CustomMarshalers\StringMarshaler.cs" />
+    <Compile Include="DefaultPromptService.cs" />
+    <Compile Include="DOM\Events\GeckoUIEvent.cs" />
+    <Compile Include="DOM\GeckoBoxObject.cs" />
+    <Compile Include="DOM\Events\GeckoEvent.cs" />
+    <Compile Include="DOM\Events\GeckoMouseEvent.cs" />
+    <Compile Include="DOM\GeckoDOMExtensions.cs" />
+    <Compile Include="DOM\GeckoScreen.cs" />
+    <Compile Include="DOM\GeckoStyleSheetList.cs" />
+    <Compile Include="Events\CertOverrideEventArgs.cs" />
+    <Compile Include="Events\EventPhase.cs" />
+    <Compile Include="Events\GeckoDocumentCompletedEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMDragEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMEventTarget.cs" />
+    <Compile Include="Events\GeckoDOMHashChangeEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMKeyEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMMouseEventArgs.cs" />
+    <Compile Include="Events\GeckoDOMUIEventArgs.cs" />
+    <Compile Include="Events\GeckoHistoryEventArgs.cs" />
+    <Compile Include="Events\GeckoHistoryGotoIndexEventArgs.cs" />
+    <Compile Include="Events\GeckoHistoryPurgeEventArgs.cs" />
+    <Compile Include="Events\GeckoNavigatedEventArgs.cs" />
+    <Compile Include="Events\GeckoNavigatingEventArgs.cs" />
+    <Compile Include="Events\GeckoCreateWindowEventArgs.cs" />
+    <Compile Include="Events\GeckoNSSErrorEventArgs.cs" />
+    <Compile Include="Events\GeckoProgressEventArgs.cs" />
+    <Compile Include="Events\WebBrowserChromeStub.cs" />
+    <Compile Include="Events\WebBrowserGlueBase.cs" />
+    <Compile Include="GeckoArray.cs" />
+    <Compile Include="GeckoElementWeakReference.cs" />
+    <Compile Include="GeckoError.cs" />
+    <Compile Include="GeckoException.cs" />
+    <Compile Include="GeckoNodeWeakReference.cs" />
+    <Compile Include="GeckoPrincipal.cs" />
+    <Compile Include="GeckoWebNavigation.cs" />
+    <Compile Include="Graphics\GeckoGraphics.cs" />
+    <Compile Include="Graphics\GeckoGraphicsImageFormat.cs" />
+    <Compile Include="IContextMenuHandler.cs" />
+    <Compile Include="IContextMenuUpdater.cs" />
+    <Compile Include="Interop\ProgrammingLanguages.cs" />
+    <Compile Include="Javascript\GeckoJavascriptBridge.cs" />
+    <Compile Include="Javascript\Sandbox.cs" />
+    <Compile Include="Javascript\ScriptableObjectBase.cs" />
+    <Compile Include="Security\CertOverride.cs" />
+    <Compile Include="Services\ObserverService.cs" />
+    <Compile Include="WebView.Gecko.Events.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Gecko.Methods.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Gecko.Properties.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Gecko.EventsSpecific.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Gecko.PropertiesSpecial.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Windowless.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\HistoryService.cs" />
+    <Compile Include="Javascript\JSArray.cs" />
+    <Compile Include="GeckoLoadFlags.cs" />
+    <Compile Include="GeckoProperties.cs" />
+    <Compile Include="GeckoSimpleEnumerator.cs" />
+    <Compile Include="GeckoSynchronizationContext.cs" />
+    <Compile Include="GeckoTreeBoxObject.cs" />
+    <Compile Include="GeckoTreeColumn.cs" />
+    <Compile Include="GeckoTreeSelection.cs" />
+    <Compile Include="GeckoTreeView.T.cs" />
+    <Compile Include="GeckoWeakReference.cs" />
+    <Compile Include="GeckoWindowWeakReference.cs" />
+    <Compile Include="GUI\GeckoXULWindow.cs" />
+    <Compile Include="IEventedWebView.cs" />
+    <Compile Include="Interop\NativeArray.T.cs" />
+    <Compile Include="IO\ByteArrayInputStream.cs" />
+    <Compile Include="Cache\CacheAccessMode.cs" />
+    <Compile Include="Cache\CacheStoragePolicy.cs" />
+    <Compile Include="Contracts.cs" />
+    <Compile Include="CustomMarshalers\WStringMarshaler.cs" />
+    <Compile Include="DirectoryServiceProvider.cs" />
+    <Compile Include="DOM\Abstractions\GeckoDocument.T.cs" />
+    <Compile Include="DOM\Abstractions\GeckoElement.T.cs" />
+    <Compile Include="DOM\Abstractions\GeckoHTMLElement.T.cs" />
+    <Compile Include="DOM\Abstractions\GeckoNode.T.cs" />
+    <Compile Include="DOM\Abstractions\GeckoCharacterData.T.cs" />
+    <Compile Include="DOM\CSS\GeckoCSSRule.cs" />
+    <Compile Include="DOM\CSS\GeckoCSSRuleList.cs" />
+    <Compile Include="DOM\CSS\GeckoCSSRuleType.cs" />
+    <Compile Include="DOM\GeckoDocumentFragment.cs" />
+    <Compile Include="DOM\GeckoDocumentType.cs" />
+    <Compile Include="DOM\GeckoCDATASection.cs" />
+    <Compile Include="DOM\GeckoComment.cs" />
+    <Compile Include="DOM\CSS\GeckoCSSStyleDeclaration.cs" />
+    <Compile Include="DOM\CSS\GeckoCSSStyleSheet.cs" />
+    <Compile Include="DOM\GeckoMediaList.cs" />
+    <Compile Include="DOM\GeckoMozNamedAttrMap.cs" />
+    <Compile Include="DOM\GeckoStyleSheet.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLAudioElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLMenuItemElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLSourceElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLVideoElement.cs" />
+    <Compile Include="DOM\SVG\GeckoSVGElement.cs" />
+    <Compile Include="DOM\GeckoText.cs" />
+    <Compile Include="DOM\GeckoNavigator.cs" />
+    <Compile Include="DOM\GeckoParser.cs" />
+    <Compile Include="DOM\GeckoAttribute.cs" />
+    <Compile Include="DOM\GeckoDocument.cs" />
+    <Compile Include="DOM\GeckoElement.cs" />
+    <Compile Include="DOM\GeckoCollection.cs" />
+    <Compile Include="DOM\GeckoHTMLCollection.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLElement.cs" />
+    <Compile Include="DOM\GeckoNode.cs" />
+    <Compile Include="DOM\GeckoNodeCollection.cs" />
+    <Compile Include="DOM\GeckoLocation.cs" />
+    <Compile Include="DOM\XML\GeckoXMLDocument.cs" />
+    <Compile Include="GeckoInterfaces\nsInterfaces.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GeckoObjectCache.cs" />
+    <Compile Include="DOM\GeckoRange.cs" />
+    <Compile Include="DOM\GeckoSelection.cs" />
+    <Compile Include="DOM\GeckoWindow.cs" />
+    <Compile Include="DOM\GeckoWindowCollection.cs" />
+    <Compile Include="DOM\GeckoXPathResult.cs" />
+    <Compile Include="DOM\XUL\GeckoXULElement.cs" />
+    <Compile Include="DOM\HTML\DOMHTMLElementFactory.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLButtonElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLCanvasElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLDirectoryElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLDocument.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLEmbedElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLFieldSetElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLFrameElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLFrameSetElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLHeadElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLAnchorElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLAppletElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLAreaElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLBodyElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLBaseElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLFormElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLHRElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLHtmlElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLIFrameElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLInputElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLImageElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLLabelElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLLIElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLLinkElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLMapElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLMenuElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLMetaElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLOListElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLOptGroupElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLParagraphElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLPreElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLQuoteElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLScriptElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLSelectElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLOptionsCollection.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLOptionElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLStyleElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLTextAreaElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLUListElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLObjectElement.cs" />
+    <Compile Include="DOM\HTML\GeckoHTMLTableCellElement.cs" />
+    <Compile Include="DOM\GeckoNodeType.cs" />
+    <Compile Include="DOM\GeckoWindowUtils.cs" />
+    <Compile Include="DOM\XUL\GeckoXULDocument.cs" />
+    <Compile Include="GeckoMouseButton.cs" />
+    <Compile Include="GeckoPreferences.cs" />
+    <Compile Include="Interop\ComDebug.cs" />
+    <Compile Include="Interop\ComObject.cs" />
+    <Compile Include="Interop\Delegates.cs" />
+    <Compile Include="Interop\ExtensionMethods.cs" />
+    <Compile Include="IGeckoObjectWrapper.cs" />
+    <Compile Include="IO\GeckoStream.cs" />
+    <Compile Include="IO\InputStream.cs" />
+    <Compile Include="IO\IOService.cs" />
+    <Compile Include="IO\MimeInputStream.cs" />
+    <Compile Include="IO\OutputStream.cs" />
+    <Compile Include="IO\StringInputStream.cs" />
+    <Compile Include="IWebView.cs" />
+    <Compile Include="NativeMethods.Windows.cs" />
+    <Compile Include="Net\Cookie.cs" />
+    <Compile Include="Net\CookieManager.cs" />
+    <Compile Include="Net\GeckoRequest.cs" />
+    <Compile Include="Plugins\PluginTagState.cs" />
+    <Compile Include="Security\NSSError.cs" />
+    <Compile Include="nsString.cs" />
+    <Compile Include="GeckoPersistentProperties.cs" />
+    <Compile Include="Plugins\PluginHost.cs" />
+    <Compile Include="Plugins\PluginTag.cs" />
+    <Compile Include="Security\ASN1Object.cs" />
+    <Compile Include="Security\ASN1Tree.cs" />
+    <Compile Include="Security\Certificate.cs" />
+    <Compile Include="Security\CertificateDatabase.cs" />
+    <Compile Include="Security\CertOverrideService.cs" />
+    <Compile Include="Security\CertTree.cs" />
+    <Compile Include="Security\CertTreeItem.cs" />
+    <Compile Include="Security\Cryptography\AlgorithmType.cs" />
+    <Compile Include="Security\Cryptography\CryptoHash.cs" />
+    <Compile Include="Security\Cryptography\HashAlgorithm.cs" />
+    <Compile Include="Security\Cryptography\KeyObject.cs" />
+    <Compile Include="Security\Cryptography\KeyObjectFactory.cs" />
+    <Compile Include="Security\Cryptography\KeyType.cs" />
+    <Compile Include="Security\SSLStatus.cs" />
+    <Compile Include="Security\X509CertificateValidity.cs" />
+    <Compile Include="Security\X509CertList.cs" />
+    <Compile Include="Services\BaseNsFactory.cs" />
+    <Compile Include="Services\ContractIDAttribute.cs" />
+    <Compile Include="Services\GenericOneClassNsFactory.cs" />
+    <Compile Include="Services\XPConnectService.cs" />
+    <Compile Include="SpiderMonkey\JSType.cs" />
+    <Compile Include="SpiderMonkey\JSVal.cs" />
+    <Compile Include="SpiderMonkey\JSValueType.cs" />
+    <Compile Include="SyncTask.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="UUID.cs" />
+    <Compile Include="Variant.cs" />
+    <Compile Include="WebView.Windowless.Glue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WindowCreator.cs" />
+    <Compile Include="Xpcom.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.Version.cs" />
+    <Compile Include="XpcomIdleEvent.cs" />
+    <Compile Include="XPI\Interfaces\nsIGeckoScriptBridge.cs" />
+    <Compile Include="XulfxSingletonFactory.cs" />
+    <Compile Include="XULRunnerLocator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NativeMethods.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="XPI\build-all.bat" />
+    <None Include="XPI\build-helpers.bat" />
+    <None Include="XPI\build-xpt.bat" />
+    <None Include="XPI\Content\chrome.manifest" />
+    <None Include="XPI\Content\chrome\branding\locale\brand.dtd" />
+    <None Include="XPI\Content\chrome\content\window.xul">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XPI\Content\components\helpers\auto.manifest" />
+    <None Include="XPI\Content\components\helpers\chrome.manifest" />
+    <None Include="XPI\Content\install.rdf" />
+    <None Include="XulFx.config" />
+    <None Include="xulfx.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="map.xml" />
+    <Content Include="XPI\Content\components\GeckoScriptBridge.js" />
+    <Content Include="XPI\Content\components\helpers\generated\XulfxDOMWindowHelper.js" />
+    <Content Include="XPI\Content\components\helpers\generated\XulfxWEBAPIPerfomanceHelper.js" />
+    <Content Include="XPI\Content\components\XPath.js" />
+    <Content Include="XPI\Content\components\Xulfx.js" />
+    <Content Include="XPI\Content\components\XulfxCookieHelper.js" />
+    <Content Include="XPI\Content\components\XulfxDownloadHelper.js" />
+    <Content Include="XPI\Content\components\XulfxEventHelper.js" />
+    <Content Include="XPI\idl\helpers\auto\nsIXulfxWEBAPIPerfomanceHelper.idl" />
+    <Content Include="XPI\idl\nsIDOMWindowCollection.idl" />
+    <Content Include="XPI\idl\nsIGeckoScriptBridge.idl" />
+    <Content Include="XPI\idl\helpers\auto\nsIXulfxDOMWindowHelper.idl" />
+    <Content Include="XPI\idl\nsIXulfxCookieManager.idl" />
+    <Content Include="XPI\idl\nsIXulfxDOMXPathEvaluator.idl" />
+    <Content Include="XPI\idl\nsIXulfxEventHelper.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XPI\Content\modules\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>set PATH="$(SolutionDir)packages/7-Zip.CommandLine.9.20.0/tools"
+7za a -tzip "$(TargetDir)$(TargetName).xpi" "$(ProjectDir)XPI/Content/*"</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<IDLTypeMap>
+	<TypeContainer type="nsICacheEntryInfo" file="nsICacheVisitor.idl" />
+	<TypeContainer type="mozIDOMApplication" file="nsIDOMApplicationRegistry.idl" />
+	<TypeContainer type="mozIDOMApplicationRegistry" file="nsIDOMApplicationRegistry.idl" />
+	<TypeContainer type="nsIDOMXULLabeledControlElement" file="nsIDOMXULLabeledControlEl.idl" />
+	<TypeContainer type="nsIDOMXULSelectControlElement" file="nsIDOMXULSelectCntrlEl.idl" />
+	<TypeContainer type="nsIHandlerApp" file="nsIMIMEInfo.idl" />
+	<TypeContainer type="nsIXULChromeRegistry" file="nsIChromeRegistry.idl" />
+	<TypeContainer type="nsIRoutedSocketTransportService" file="nsISocketTransportService.idl" />
+	<!-- native interfaces -->
+	<TypeReference type="nsIContentViewerTArray" clrtype="System.IntPtr" />
+	<TypeReference type="nsPIDOMWindow" clrtype="System.IntPtr" />
+	<TypeReference type="nsPIDOMWindowInner" clrtype="System.IntPtr" />
+	<TypeReference type="nsIWidget" clrtype="System.IntPtr" />
+	<TypeReference type="nsIDocument" clrtype="System.IntPtr" />
+	<TypeReference type="nsIContent" clrtype="System.IntPtr" />
+	<TypeReference type="nsINode" clrtype="System.IntPtr" />
+	<TypeReference type="nsILayoutHistoryState" clrtype="System.IntPtr" />	
+	<TypeReference type="nsIObjectFrame" clrtype="System.IntPtr" />
+	<TypeReference type="nsIPresShell" clrtype="System.IntPtr" />
+	<TypeReference type="nsIScriptElement" clrtype="System.IntPtr" />	
+	<TypeReference type="nsIScriptContext" clrtype="System.IntPtr" />
+	<TypeReference type="nsIScrollObserver" clrtype="System.IntPtr" />	
+	<TypeReference type="nsIUnicodeDecoder" clrtype="System.IntPtr" />	
+	<TypeReference type="nsIWordBreaker" clrtype="System.IntPtr" />	
+	<TypeReference type="nsIFrame" clrtype="System.IntPtr" />
+	<TypeReference type="nsIScriptGlobalObject" clrtype="System.IntPtr" />
+	<TypeReference type="nsIGlobalObject" clrtype="System.IntPtr" />
+	<TypeReference type="nsIUnicodeEncoder" clrtype="System.IntPtr" />
+	<TypeReference type="nsSubDocumentFrame" clrtype="System.IntPtr" />
+	<TypeReference type="nsIConsoleReportCollector" clrtype="System.IntPtr" />
+	<!-- native types -->
+	<TypeReference type="nsWriteSegmentFun" clrtype="nsWriteSegmentFun" subtype="delegate" />
+	<TypeReference type="xpcGCCallback" clrtype="xpcGCCallback" subtype="delegate" />
+	<TypeReference type="xpcContextCallback" clrtype="xpcContextCallback" subtype="delegate" />
+	<TypeReference type="nsDirection" clrtype="nsDirection" subtype="enum" />
+	<TypeReference type="ScrollAxis" clrtype="ScrollAxis" subtype="struct" />
+	<TypeReference type="gfxGraphicsFilter" clrtype="gfxGraphicsFilter" subtype="enum" />
+	<TypeReference type="nscolor" clrtype="nscolor" subtype="struct" />
+	<TypeReference type="nsConstRect" clrtype="System.IntPtr" subtype="struct" />
+	<TypeReference type="gfxContext" clrtype="System.IntPtr" subtype="struct" />
+</IDLTypeMap>

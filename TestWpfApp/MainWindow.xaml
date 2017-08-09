@@ -1,0 +1,59 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:Gecko="clr-namespace:Gecko.Windows;assembly=XulFx.Wpf"
+		x:Class="TestWpfApp.MainWindow"
+        Title="MainWindow" Height="496" Width="748">
+	<DockPanel>
+		<Grid DockPanel.Dock="Top" Height="25">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="20"/>
+				<ColumnDefinition Width="20"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			
+			<Button Content="&lt;" Grid.Column="0" Click="btnBack_Click">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="IsEnabled" Value="False"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding ElementName=pageView, Path=CanGoBack}" Value="True">
+								<Setter Property="Button.IsEnabled" Value="True"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button Content="&gt;" Grid.Column="1" Click="btnForward_Click">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="IsEnabled" Value="False"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding ElementName=pageView, Path=CanGoForward}" Value="True">
+								<Setter Property="Button.IsEnabled" Value="True"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button x:Name="btnGo" Content="Go" Click="btnGo_Click" Grid.Column="2" />
+			<TextBox x:Name="txtAddress" Text="{Binding ElementName=pageView, Path=Url}" Grid.Column="3" KeyDown="txtAddress_KeyDown" />
+		</Grid>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="25">
+			<Button x:Name="btnPrint" Content="Print" Click="btnPrint_Click" Width="60"/>
+		</StackPanel>
+		<Grid ShowGridLines="True">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition Height="150"/>
+			</Grid.RowDefinitions>
+			<Gecko:WebView x:Name="pageView" Margin="5" Grid.Row="0" DocumentTitleChanged="OnTitled" />
+			<Gecko:WebView x:Name="pageView2" Margin="5" Grid.Row="1" />
+
+
+		</Grid>
+
+
+	</DockPanel>
+</Window>

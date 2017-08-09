@@ -1,0 +1,20 @@
+#include "domstubs.idl"
+
+interface nsICookie2;
+interface nsISimpleEnumerator;
+
+[scriptable, uuid(817f063a-215a-11e7-93ae-92361f002671)]
+interface nsIXulfxCookieManager : nsISupports
+{
+    void remove(in AUTF8String aHost, in ACString aName, in AUTF8String aPath, in boolean aBlocked);
+    void add(in AUTF8String aHost,
+        in AUTF8String aPath,
+        in ACString    aName,
+        in ACString    aValue,
+        in boolean     aIsSecure,
+        in boolean     aIsHttpOnly,
+        in boolean     aIsSession,
+        in int64_t     aExpiry);
+    boolean cookieExists(in nsICookie2 aCookie);
+    nsISimpleEnumerator getCookiesFromHost(in AUTF8String aHost);
+};

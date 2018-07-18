@@ -113,17 +113,17 @@ namespace Gecko.DOM
 		/// <param name="node"></param>
 		/// <param name="xpathExpression">The xpath expression.</param>
 		/// <returns></returns>
-		public static IEnumerable<GeckoNode> GetNodes(this GeckoNode node, string xpathExpression)
-		{
-			GeckoDocument document = (node as GeckoDocument) ?? node.OwnerDocument;
-			if (document == null)
-				throw new InvalidOperationException();
+		//public static IEnumerable<GeckoNode> GetNodes(this GeckoNode node, string xpathExpression)
+		//{
+		//	GeckoDocument document = (node as GeckoDocument) ?? node.OwnerDocument;
+		//	if (document == null)
+		//		throw new InvalidOperationException();
 
-			using(GeckoXPathResult xpathResult = document.Evaluate(xpathExpression, node, GeckoXPathResultType.Any))
-			{
-				return xpathResult.AsEnumerable();
-			}
-		}
+		//	using(GeckoXPathResult xpathResult = document.Evaluate(xpathExpression, node, GeckoXPathResultType.Any))
+		//	{
+		//		return xpathResult.AsEnumerable();
+		//	}
+		//}
 
 		/// <summary>
 		/// Get a node from give xpath expression.
@@ -131,17 +131,17 @@ namespace Gecko.DOM
 		/// <param name="node"></param>
 		/// <param name="xpathExpression">The xpath expression.</param>
 		/// <returns></returns>
-		public static GeckoNode GetSingleNode(this GeckoNode node, string xpathExpression)
-		{
-			GeckoDocument document = (node as GeckoDocument) ?? node.OwnerDocument;
-			if (document == null)
-				throw new InvalidOperationException();
+		//public static GeckoNode GetSingleNode(this GeckoNode node, string xpathExpression)
+		//{
+		//	GeckoDocument document = (node as GeckoDocument) ?? node.OwnerDocument;
+		//	if (document == null)
+		//		throw new InvalidOperationException();
 
-			using(GeckoXPathResult xpathResult = document.Evaluate(xpathExpression, node, GeckoXPathResultType.AnyUnorderedNode))
-			{
-				return xpathResult.SingleNodeValue;
-			}
-		}
+		//	using(GeckoXPathResult xpathResult = document.Evaluate(xpathExpression, node, GeckoXPathResultType.AnyUnorderedNode))
+		//	{
+		//		return xpathResult.SingleNodeValue;
+		//	}
+		//}
 
 		/// <summary>
 		/// Get a WebBrowserGlueBase from give nsIWebBrowserChrome.

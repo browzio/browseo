@@ -2,7 +2,7 @@
 using Gecko.Interop;
 using System;
 
-namespace Gecko.Services
+namespace Gecko.Services.Old
 {
 	public sealed class ObserverService : ComObject<nsIObserverService>, IGeckoObjectWrapper
 	{

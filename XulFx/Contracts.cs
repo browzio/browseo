@@ -7,20 +7,28 @@ namespace Gecko
 {
 	public static partial class Contracts
 	{
-		public const string GeckoJavaScriptBridge = "@gecko/scriptbridge;1";
-		public const string XulfxContextMenuUpdater = "@xulfx/view/contextmenu/updater;1";
-		public const string XulfxContextMenuHandler = "@xulfx/view/contextmenu/handler;1";
-		public const string XulfxDownloadHelper = "@xulfx/download/helper;1";
-		public const string Xulfx = "@xulfx/xulfx;1";
-		public const string XulfxXPathEvaluator = "@xulfx/xpath/evaluator;1";
-		public const string XulfxCookieManager = "@xulfx/cookie/helper;1";
-		public const string XulfxEventHelper = "@xulfx/event/helper;1";
+        //XulfxDOMWindow
+        public const string GeckoJavaScriptBridge = "@gecko/scriptbridge;1";
+        public const string XulfxContextMenuUpdater = "@xulfx/view/contextmenu/updater;1";
+        public const string XulfxContextMenuHandler = "@xulfx/view/contextmenu/handler;1";
+        public const string XulfxDownloadHelper = "@xulfx/download/helper;1";
+        public const string Xulfx = "@xulfx/xulfx;1";
+        public const string XulfxXPathEvaluator = "@xulfx/xpath/evaluator;1";
+        public const string XulfxCookieManager = "@xulfx/cookie/helper;1";
+        public const string XulfxEventHelper = "@xulfx/event/helper;1";
+        public const string XulfxDOMWindow = "@xulfx/dom/window;1";
+       // public const string XulfxWebApiPerformance = "@xulfx/webapi/perfomance;1";
 
 
-		public const string WebBrowser = "@mozilla.org/embedding/browser/nsWebBrowser;1";
+        public const string WebBrowser = "@mozilla.org/embedding/browser/nsWebBrowser;1";
+        public const string NS_BROWSERDIRECTORYPROVIDER_CONTRACTID = "@mozilla.org/browser/directory-provider;1";
+        public const string NS_SESSIONSTOREUTILS_CONTRACTID = "@mozilla.org/browser/sessionstore/utils;1";
+        public const string NS_SHELLSERVICE_CONTRACTID = "@mozilla.org/browser/shell-service;1";
+        public const string NS_ABOUT_MODULE_CONTRACTID = "@mozilla.org/network/protocol/about;1";
+        public const string NS_ABOUT_MODULE_CONTRACTID_PREFIX = NS_ABOUT_MODULE_CONTRACTID + "?what=";
 
-		#region Network
-		public const string MimeInputStream = "@mozilla.org/network/mime-input-stream;1";
+        #region Network
+        public const string MimeInputStream = "@mozilla.org/network/mime-input-stream;1";
 		public const string DnsService = "@mozilla.org/network/dns-service;1";
 		public const string StreamListenerTee = "@mozilla.org/network/stream-listener-tee;1";
 		public const string CacheService = "@mozilla.org/network/cache-service;1";
@@ -68,14 +76,20 @@ namespace Gecko
 		public const string Principal = "@mozilla.org/principal;1";
 		public const string SystemPrincipal = "@mozilla.org/systemprincipal;1";
 		public const string ContentPolicy = "@mozilla.org/layout/content-policy;1";
-		#endregion
-		#region AppShell
-		public const string AppShellService = "@mozilla.org/appshell/appShellService;1";
-		public const string WindowMediator = "@mozilla.org/appshell/window-mediator;1";
+        #endregion
+        #region AppShell
+        public const string AppStartup = "@mozilla.org/toolkit/app-startup;1";
+        public const string SessionStartup = "@mozilla.org/browser/sessionstartup;1";
+        public const string AppStartupNotifier = "@mozilla.org/embedcomp/appstartup-notifier;1";
+        public const string NS_NATIVEAPPSUPPORT_CONTRACTID = "@mozilla.org/toolkit/native-app-support;1";
+        public const string AppShellService = "@mozilla.org/appshell/appShellService;1";
+        public const string WindowMediator = "@mozilla.org/appshell/window-mediator;1";
 		public const string FocusManager = "@mozilla.org/focus-manager;1";
-		#endregion
-		#region Image
-		public const string ImageCache = "@mozilla.org/image/cache;1";
+		public const string AppShell = "@mozilla.org/widget/appshell/win;1";
+        //
+        #endregion
+        #region Image
+        public const string ImageCache = "@mozilla.org/image/cache;1";
 		#endregion
 		#region IO
 		public const string PromptService = "@mozilla.org/embedcomp/prompt-service;1";
@@ -92,10 +106,22 @@ namespace Gecko
 		public const string MultiplexInputStream = "@mozilla.org/io/multiplex-input-stream;1";
 		public const string IOUtil = "@mozilla.org/io-util;1";
 		public const string InputStreamPump = "@mozilla.org/network/input-stream-pump;1";
-		#endregion
+        #endregion
 
-		public const string XPConnect = "@mozilla.org/js/xpc/XPConnect;1";
-		public const string DomParser = "@mozilla.org/xmlextras/domparser;1";
+        //
+        public const string GlobalMessageManager = "@mozilla.org/globalmessagemanager;1";
+        //
+        public const string ParentProcessMessageManager = "@mozilla.org/parentprocessmessagemanager;1";
+        //
+        public const string ChildProcessMessageManager = "@mozilla.org/childprocessmessagemanager;1";
+
+
+        public const string TransportService = "@mozilla.org/network/socket-transport-service;1";
+        public const string SuppressorService = "@mozilla.org/focus-event-suppressor-service;1";
+        public const string CommandLine = "@mozilla.org/toolkit/command-line;1";
+
+        public const string XPConnect = "@mozilla.org/js/xpc/XPConnect;1";
+        public const string DomParser = "@mozilla.org/xmlextras/domparser;1";
 		public const string FormData = "@mozilla.org/files/formdata;1";
 		public const string EventListenerService = "@mozilla.org/eventlistenerservice;1";
 		public const string HtmlCopyEncoder = "@mozilla.org/layout/htmlCopyEncoder;1";
@@ -246,7 +272,7 @@ namespace Gecko
 		public const string SpellCheckerInline = "@mozilla.org/spellchecker-inline;1";
 		public const string SpellChecker = "@mozilla.org/spellchecker;1";
 		public const string NsCommandHandler = "@mozilla.org/embedding/browser/nsCommandHandler;1";
-		public const string AppStartupNotifier = "@mozilla.org/embedcomp/appstartup-notifier;1";
+		
 		public const string CommandManager = "@mozilla.org/embedcomp/command-manager;1";
 		public const string CommandParams = "@mozilla.org/embedcomp/command-params;1";
 		public const string ControllerCommandTable = "@mozilla.org/embedcomp/controller-command-table;1";
@@ -257,7 +283,7 @@ namespace Gecko
 		public const string PrintingPromptService = "@mozilla.org/embedcomp/printingprompt-service;1";
 		public const string NsWebBrowserPersist = "@mozilla.org/embedding/browser/nsWebBrowserPersist;1";
 		public const string DialogParam = "@mozilla.org/embedcomp/dialogparam;1";
-		public const string NsLocaleService = "@mozilla.org/intl/nslocaleservice;1";
+        public const string NsLocaleService = "@mozilla.org/intl/nslocaleservice;1";
 		public const string ScriptableDateFormat = "@mozilla.org/intl/scriptabledateformat;1";
 		public const string Collation = "@mozilla.org/intl/collation;1";
 		public const string CollationFactory = "@mozilla.org/intl/collation-factory;1";

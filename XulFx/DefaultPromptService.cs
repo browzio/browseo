@@ -83,7 +83,7 @@ namespace Gecko
 		private static DefaultPromptService _defaultPromptService;
 		private static Func<DefaultPromptService> _promptGetter;
 
-		internal static void Init()
+        public static void Init()
 		{
 			if (_nativePromptFactory == null)
 				_nativePromptFactory = Xpcom.GetService<nsIPromptFactory>(Contracts.Prompter);

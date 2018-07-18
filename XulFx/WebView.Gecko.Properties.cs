@@ -27,10 +27,10 @@ namespace Gecko
 				return new List<string>(new string[] {
 					"DOMTitleChanged",
 					"submit",
-					"keydown",
-					"keyup",
-					"keypress",
-					"mousemove",
+                    "keydown",
+                    "keyup",
+                    "keypress",
+                    "mousemove",
 					"mouseover",
 					"mouseout",
 					"mousedown",
@@ -43,6 +43,7 @@ namespace Gecko
 					"DOMMouseScroll",
 					"focus",
 					"blur",
+                    "pageshow",
 					// Load event added here rather than DOMDocument as DOMDocument recreated when navigating
 					// ths losing attached listener.
 					"load",

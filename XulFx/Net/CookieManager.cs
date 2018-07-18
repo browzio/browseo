@@ -8,7 +8,7 @@ namespace Gecko.Net
 {
 	public sealed class CookieManager : ComObject<nsICookieManager2>, IGeckoObjectWrapper, ICollection<Cookie>
 	{
-		private nsIXulfxCookieManager _helper;
+		//private nsIXulfxCookieManager _helper;
 
 		public static CookieManager GetService()
 		{
@@ -28,23 +28,24 @@ namespace Gecko.Net
 
 		protected override void Dispose(bool disposing)
 		{
-			Xpcom.FreeComObject(ref _helper);
+			//Xpcom.FreeComObject(ref _helper);
 			base.Dispose(disposing);
 		}
 
-		private nsIXulfxCookieManager Helper
-		{
-			get
-			{
-				if (_helper == null)
-				{
-					if (this.Instance == null)
-						throw new ObjectDisposedException(this.GetType().Name);
-					_helper = Xpcom.GetService<nsIXulfxCookieManager>(Contracts.XulfxCookieManager);
-				}
-				return _helper;
-			}
-		}
+		//private nsIXulfxCookieManager Helper
+		//{
+		//	get
+		//	{
+		//		if (_helper == null)
+		//		{
+		//			if (this.Instance == null)
+		//				throw new ObjectDisposedException(this.GetType().Name);
+		//			//_helper = Xpcom.GetService<nsIXulfxCookieManager>(Contracts.XulfxCookieManager);
+  //                  _helper = Xpcom.GetService<nsIXulfxCookieManager>("");
+		//		}
+		//		return _helper;
+		//	}
+		//}
 
 		public void Add(string host, string path, string name, string value, bool isSecure, bool isHttpOnly, bool isSession, DateTime expiry)
 		{
@@ -52,7 +53,7 @@ namespace Gecko.Net
 			{
 				using (nsACString aName = new nsACString(name), aValue = new nsACString(value))
 				{
-					this.Helper.Add(aHost, aPath, aName, aValue, isSecure, isHttpOnly, isSession, (long)Utils.ToSecondsSinceEpoch(expiry));
+					//this.Helper.Add(aHost, aPath, aName, aValue, isSecure, isHttpOnly, isSession, (long)Utils.ToSecondsSinceEpoch(expiry));
 				}
 			}
 		}
@@ -69,18 +70,18 @@ namespace Gecko.Net
 			}
 		}
 
-		public IEnumerable<Cookie> GetCookiesFromHost(string host)
-		{
-			using(var aHost = new nsAUTF8String(host))
-			{
-				using (var enumerator = new GeckoSimpleEnumerator<nsICookie2, Cookie>(Helper.GetCookiesFromHost(aHost), Cookie.Create))
-				{
-					while (enumerator.MoveNext())
-						yield return enumerator.Current;
-				}
-			}
+		//public IEnumerable<Cookie> GetCookiesFromHost(string host)
+		//{
+		//	using(var aHost = new nsAUTF8String(host))
+		//	{
+		//		using (var enumerator = new GeckoSimpleEnumerator<nsICookie2, Cookie>(Helper.GetCookiesFromHost(aHost), Cookie.Create))
+		//		{
+		//			while (enumerator.MoveNext())
+		//				yield return enumerator.Current;
+		//		}
+		//	}
 			
-		}
+		//}
 
 		public void ImportCookies(string filename)
 		{
@@ -99,7 +100,7 @@ namespace Gecko.Net
 			{
 				using (var aName = new nsACString(name))
 				{
-					Helper.Remove(aHost, aName, aPath, blocked);
+					//Helper.Remove(aHost, aName, aPath, blocked);
 				}
 			}
 		}
@@ -133,7 +134,8 @@ namespace Gecko.Net
 
 		public bool Contains(Cookie item)
 		{
-			return Helper.CookieExists(item.Instance);
+            return false;
+			//return Helper.CookieExists(item.Instance);
 		}
 
 		public void CopyTo(Cookie[] array, int destIndex)

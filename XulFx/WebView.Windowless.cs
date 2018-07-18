@@ -54,7 +54,7 @@ namespace Gecko
 				if (_viewsCache.TryGetValue(chrome, out weakRef))
 				{
 					var view = weakRef.Target as WindowlessWebView;
-					if (view != null && view._webNav != null)
+					//if (view != null && view._webNav != null)
 						return view._wbGlue;
 				}
 			}
@@ -80,26 +80,26 @@ namespace Gecko
 			nsIAppShellService appShell = Xpcom.GetService<nsIAppShellService>(Contracts.AppShellService);
 			try
 			{
-				_webNav = appShell.CreateWindowlessBrowser(isChrome).Wrap(GeckoWebNavigation.Create);
-				browser = _webNav.QueryInterface<nsIWebBrowser>();
-				_chrome = browser.GetContainerWindowAttribute();
-				AddToCache(this);
+                _webNav = appShell.CreateWindowlessBrowser(isChrome).Wrap(GeckoWebNavigation.Create);
+                browser = _webNav.QueryInterface<nsIWebBrowser>();
+                _chrome = browser.GetContainerWindowAttribute();
+                AddToCache(this);
 
-				docShell = this.WebNav.QueryInterface<nsIDocShell>();
+                docShell = this.WebNav.QueryInterface<nsIDocShell>();
 
-				GeckoPrincipal principals = isChrome ? GeckoPrincipal.SystemPrincipal : GeckoPrincipal.NullPrincipal;
-				docShell.CreateAboutBlankContentViewer(principals.Instance);
-				GC.KeepAlive(principals);
+                GeckoPrincipal principals = isChrome ? GeckoPrincipal.SystemPrincipal : GeckoPrincipal.NullPrincipal;
+                docShell.CreateAboutBlankContentViewer(principals.Instance);
+                GC.KeepAlive(principals);
 
-				progress = Xpcom.QueryInterface<nsIWebProgress>(docShell);
-				progress.AddProgressListener(_wbGlue, (uint)(nsIWebProgressConsts.NOTIFY_STATE_ALL | nsIWebProgressConsts.NOTIFY_ALL));
+                progress = Xpcom.QueryInterface<nsIWebProgress>(docShell);
+                progress.AddProgressListener(_wbGlue, (uint)(nsIWebProgressConsts.NOTIFY_STATE_ALL | nsIWebProgressConsts.NOTIFY_ALL));
 
-				_eventTarget = this.Window.WindowRoot;
-				foreach (string eventName in this.HandledDOMEvents)
-				{
-					_eventTarget.AddEventListener(eventName, _wbGlue, true, true, 2);
-				}
-			}
+                _eventTarget = this.Window.WindowRoot;
+                foreach (string eventName in this.HandledDOMEvents)
+                {
+                    _eventTarget.AddEventListener(eventName, _wbGlue, true, true, 2);
+                }
+            }
 			finally
 			{
 				Xpcom.FreeComObject(ref appShell);
@@ -118,78 +118,78 @@ namespace Gecko
 		{
 			base.Dispose(disposing);
 
-			if (disposing && _webNav != null)
-			{
-				nsIBaseWindow baseWindow = null;
-				try
-				{
-					_disposing = true;
-					nsIDocShell docShell = null;
-					nsIWebProgress progress = null;
-					try
-					{
-						baseWindow = _webNav.QueryInterface<nsIBaseWindow>();
-						docShell = _webNav.QueryInterface<nsIDocShell>();
-						if (docShell != null && !docShell.IsBeingDestroyed())
-						{
-							var window = Xpcom.QueryInterface<nsIDOMWindow>(docShell).Wrap(GeckoWindow.Create);
-							if (window != null)
-							{
-								if (!window.Closed) window.Close();
-							}
-							progress = Xpcom.QueryInterface<nsIWebProgress>(docShell);
-							progress.RemoveProgressListener(_wbGlue);
-						}
-						_webNav = null;
-					}
-					finally
-					{
-						Xpcom.FreeComObject(ref progress);
-						Xpcom.FreeComObject(ref docShell);
-					}
+            if (disposing && _webNav != null)
+            {
+                nsIBaseWindow baseWindow = null;
+                try
+                {
+                    _disposing = true;
+                    nsIDocShell docShell = null;
+                    nsIWebProgress progress = null;
+                    try
+                    {
+                        baseWindow = _webNav.QueryInterface<nsIBaseWindow>();
+                        docShell = _webNav.QueryInterface<nsIDocShell>();
+                        if (docShell != null && !docShell.IsBeingDestroyed())
+                        {
+                            var window = Xpcom.QueryInterface<nsIDOMWindow>(docShell).Wrap(GeckoWindow.Create);
+                            if (window != null)
+                            {
+                                if (!window.Closed) window.Close();
+                            }
+                            progress = Xpcom.QueryInterface<nsIWebProgress>(docShell);
+                            progress.RemoveProgressListener(_wbGlue);
+                        }
+                        _webNav = null;
+                    }
+                    finally
+                    {
+                        Xpcom.FreeComObject(ref progress);
+                        Xpcom.FreeComObject(ref docShell);
+                    }
 
-					if (_eventTarget != null)
-					{
-						//Remove Event Listener			
-						foreach (string eventName in this.HandledDOMEvents)
-						{
-							_eventTarget.RemoveEventListener(eventName, _wbGlue, true);
-						}
-						((IDisposable)_eventTarget).Dispose();
-						_eventTarget = null;
-					}
-				}
-				finally
-				{
-					_disposing = false;
-					baseWindow.Destroy();
-				}
-			}
-		}
+                    if (_eventTarget != null)
+                    {
+                        //Remove Event Listener			
+                        foreach (string eventName in this.HandledDOMEvents)
+                        {
+                            _eventTarget.RemoveEventListener(eventName, _wbGlue, true);
+                        }
+                        ((IDisposable)_eventTarget).Dispose();
+                        _eventTarget = null;
+                    }
+                }
+                finally
+                {
+                    _disposing = false;
+                    baseWindow.Destroy();
+                }
+            }
+        }
 
-		protected GeckoWebNavigation WebNav
-		{
-			get
-			{
-				if (_webNav == null)
-					throw new ObjectDisposedException(this.GetType().Name);
-				if (this.IsDead)
-					throw new InvalidOperationException();
-				return _webNav;
-			}
-		}
+        protected GeckoWebNavigation WebNav
+        {
+            get
+            {
+                if (_webNav == null)
+                    throw new ObjectDisposedException(this.GetType().Name);
+                if (this.IsDead)
+                    throw new InvalidOperationException();
+                return _webNav;
+            }
+        }
 
-		protected virtual bool IsDead { get; private set; }
+        protected virtual bool IsDead { get; private set; }
 
-		public virtual GeckoWindow Window
-		{
-			get
-			{
-				return this.WebNav.QueryInterface<nsIDOMWindow>().Wrap(GeckoWindow.Create);
-			}
-		}
+        public virtual GeckoWindow Window
+        {
+            get
+            {
+                return this.WebNav.QueryInterface<nsIDOMWindow>().Wrap(GeckoWindow.Create);
+            }
+        }
 
-		protected void AssertNotPreview()
+        protected void AssertNotPreview()
 		{
 
 		}

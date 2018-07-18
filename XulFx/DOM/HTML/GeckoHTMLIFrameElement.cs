@@ -82,7 +82,7 @@ namespace Gecko.DOM.HTML
 		{
 			get
 			{
-				return GeckoJavascriptBridge.GetService().Call<GeckoDocument>(GetContentDocument);
+                return null; //GeckoJavascriptBridge.GetService().Call<GeckoDocument>(GetContentDocument);
 			}
 		}
 

@@ -1,0 +1,4 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+toolbar {
+  background-color: rgb(235, 235, 235) !important;
+}

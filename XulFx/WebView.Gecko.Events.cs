@@ -537,8 +537,12 @@ namespace Gecko
 		[Category("DOM Events")]
 		public event EventHandler<GeckoDOMEventArgs> DomSubmit
 		{
-			add { Events.AddHandler(DomSubmitEvent, value); }
-			remove { Events.RemoveHandler(DomSubmitEvent, value); }
+			add
+            {
+                Events.AddHandler(DomSubmitEvent, value); }
+			remove
+            {
+                Events.RemoveHandler(DomSubmitEvent, value); }
 		}
 
 		/// <summary>Raises the <see cref="DomSubmit"/> event.</summary>

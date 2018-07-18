@@ -8,7 +8,7 @@ namespace Gecko.Javascript
 {
 	public sealed class JSArray : ComObject<nsIVariant>, IGeckoObjectWrapper
 	{
-		private GeckoJavascriptBridge _js;
+		//private GeckoJavascriptBridge _js;
 
 		public static JSArray Create(nsIVariant instance)
 		{
@@ -18,7 +18,7 @@ namespace Gecko.Javascript
 		private JSArray(nsIVariant instance)
 			: base(instance)
 		{
-			_js = GeckoJavascriptBridge.GetService();
+			//_js = GeckoJavascriptBridge.GetService();
 		}
 
 		[IndexerName("Items")]
@@ -29,7 +29,8 @@ namespace Gecko.Javascript
 				if (index < 0)
 					throw new IndexOutOfRangeException();
 
-				return new Variant(_js.Instance.GetItem(Instance, (uint)index)).AsEvalResult();
+                return null;
+				//return new Variant(_js.Instance.GetItem(Instance, (uint)index)).AsEvalResult();
 			}
 
 			set
@@ -37,7 +38,7 @@ namespace Gecko.Javascript
 				if (index < 0)
 					throw new IndexOutOfRangeException();
 
-				((IDisposable)new Variant(_js.Instance.SetItem(Instance, (uint)index, value != null ? value.Instance : null)).AsEvalResult()).Dispose();
+				//((IDisposable)new Variant(_js.Instance.SetItem(Instance, (uint)index, value != null ? value.Instance : null)).AsEvalResult()).Dispose();
 			}
 		}
 
@@ -45,10 +46,10 @@ namespace Gecko.Javascript
 		{
 			get
 			{
-				using (Variant length = _js.GetProperty(this.Instance, "length"))
-				{
-					return length.AsInt(0);
-				}
+                //using (Variant length = _js.GetProperty(this.Instance, "length"))
+                //{
+                return 0;
+				//}
 			}
 		}
 	}

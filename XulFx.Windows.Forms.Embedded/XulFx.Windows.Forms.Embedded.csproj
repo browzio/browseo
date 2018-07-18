@@ -39,7 +39,7 @@
     <DocumentationFile>..\bin\Release\XulFx.Windows.Forms.Embedded.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\XulFx\xulfx.snk</AssemblyOriginatorKeyFile>
@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="..\XulFx.Windows.Forms\WebView.Gecko.cs">
       <Link>WebView.Gecko.cs</Link>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="..\XulFx.Windows.Forms\WebView.WebBrowser.Glue.cs">
       <Link>WebView.WebBrowser.Glue.cs</Link>

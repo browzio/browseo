@@ -69,6 +69,8 @@ namespace Gecko.Windows
 			protected override void RaiseNavigated(GeckoNavigatedEventArgs e)
 			{
 				var webNav = _view.WebNav;
+                if (webNav == null) return;//TODO ?
+
 				_view.CanGoBack = webNav.Instance.GetCanGoBackAttribute();
 				_view.CanGoForward = webNav.Instance.GetCanGoForwardAttribute();
 				_view._dontCallNavigateOnUrlChanged = true;
@@ -100,21 +102,26 @@ namespace Gecko.Windows
 
 			protected override void RaiseDOMEvent(GeckoDOMEventArgs e)
 			{
-				_view.OnHandleDomEvent(e);
+                //Console.WriteLine("RaiseDOMEvent " + e.Type);
+                _view.OnHandleDomEvent(e);
 			}
 
 			internal void DispatchDOMEvent(GeckoDOMEventArgs e)
 			{
+                //Console.WriteLine("DispatchDOMEvent " + e.Type);
 				switch (e.Type)
 				{
-					case "keydown":
+                    case "pageshow":
+                    
+                        break;
+                    case "keydown":
 						_view.OnDomKeyDown((GeckoDOMKeyEventArgs)e);
 						break;
 					case "keyup":
 						_view.OnDomKeyUp((GeckoDOMKeyEventArgs)e);
 						break;
 					case "keypress":
-						_view.OnDomKeyPress((GeckoDOMKeyEventArgs)e);
+                        _view.OnDomKeyPress((GeckoDOMKeyEventArgs)e);
 						break;
 					case "mousedown":
 						_view.OnDomMouseDown((GeckoDOMMouseEventArgs)e);
@@ -196,8 +203,9 @@ namespace Gecko.Windows
 						break;
 					case "DOMTitleChanged":
 						_view.OnDocumentTitleChanged(new RoutedEventArgs(WebView.DocumentTitleChangedEvent));
-						break;
-				}
+                        break;
+
+                }
 
 				////if (e is DomMessageEventArgs)
 				////{
@@ -218,5 +226,5 @@ namespace Gecko.Windows
 				_view.OnCreateWindow(e);
 			}
 		}
-	}
+    }
 }

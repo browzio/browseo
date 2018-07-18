@@ -176,106 +176,106 @@ namespace Gecko.Interop
 			return new ComObject<TInterface>(instance);
 		}
 
-		public static TInterface GetProperty<TInterface>(this IGeckoObjectWrapper thisObj, string propertyName)
-			where TInterface : class
-		{
-			using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
-			{
-				VariantDataType dataType = propertyValue.DataType;
-				if (dataType == VariantDataType.Void || dataType == VariantDataType.Empty)
-					return null;
-				if(dataType == VariantDataType.InterfaceIs || dataType == VariantDataType.Interface)
-				{
-					return Xpcom.QueryInterface<TInterface>(propertyValue.ToObject());
-				}
-			}
-			throw new InvalidCastException();
-		}
+        public static TInterface GetProperty<TInterface>(this IGeckoObjectWrapper thisObj, string propertyName)
+            where TInterface : class
+        {
+            using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
+            {
+                VariantDataType dataType = propertyValue.DataType;
+                if (dataType == VariantDataType.Void || dataType == VariantDataType.Empty)
+                    return null;
+                if (dataType == VariantDataType.InterfaceIs || dataType == VariantDataType.Interface)
+                {
+                    return Xpcom.QueryInterface<TInterface>(propertyValue.ToObject());
+                }
+            }
+            throw new InvalidCastException();
+        }
 
-		public static void SetProperty<TInterface>(this IGeckoObjectWrapper thisObj, string propertyName, TInterface value)
-			where TInterface : class
-		{
-			using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
-			{
-				GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
-			}
-		}
+        public static void SetProperty<TInterface>(this IGeckoObjectWrapper thisObj, string propertyName, TInterface value)
+            where TInterface : class
+        {
+            using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
+            {
+                GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
+            }
+        }
 
-		public static void SetProperty(this IGeckoObjectWrapper thisObj, string propertyName, string value)
-		{
-			using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
-			{
-				GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
-			}
-		}
+        public static void SetProperty(this IGeckoObjectWrapper thisObj, string propertyName, string value)
+        {
+            using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
+            {
+                GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
+            }
+        }
 
-		public static void SetProperty(this IGeckoObjectWrapper thisObj, string propertyName, bool value)
-		{
-			using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
-			{
-				GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
-			}
-		}
+        public static void SetProperty(this IGeckoObjectWrapper thisObj, string propertyName, bool value)
+        {
+            using (Variant thisObjArg = new Variant(thisObj), valueObj = new Variant(value))
+            {
+                GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, valueObj);
+            }
+        }
 
-		public static bool GetBooleanProperty(this IGeckoObjectWrapper thisObj, string propertyName)
-		{
-			bool value;
-			using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
-			{
-				if (propertyValue.AsBoolean(out value))
-					return value;
-			}
-			throw new InvalidCastException();
-		}
+        public static bool GetBooleanProperty(this IGeckoObjectWrapper thisObj, string propertyName)
+        {
+            bool value;
+            using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
+            {
+                if (propertyValue.AsBoolean(out value))
+                    return value;
+            }
+            throw new InvalidCastException();
+        }
 
-		public static string GetStringProperty(this IGeckoObjectWrapper thisObj, string propertyName)
-		{
-			string value;
-			using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
-			{
-				if (propertyValue.AsString(out value))
-					return value;
-			}
-			throw new InvalidCastException();
-		}
-		
-		public static int GetInt32Property(this IGeckoObjectWrapper thisObj, string propertyName)
-		{
-			int value;
-			using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
-			{
-				if (propertyValue.AsInt(out value))
-					return value;
-			}
-			throw new InvalidCastException();
-		}
+        public static string GetStringProperty(this IGeckoObjectWrapper thisObj, string propertyName)
+        {
+            string value;
+            using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
+            {
+                if (propertyValue.AsString(out value))
+                    return value;
+            }
+            throw new InvalidCastException();
+        }
 
-		public static void SetInt32Property(this IGeckoObjectWrapper thisObj, string propertyName, int value)
-		{
-			using (var thisObjArg = new Variant(thisObj))
-			{
-				GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, value);
-			}
-		}
+        public static int GetInt32Property(this IGeckoObjectWrapper thisObj, string propertyName)
+        {
+            int value;
+            using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
+            {
+                if (propertyValue.AsInt(out value))
+                    return value;
+            }
+            throw new InvalidCastException();
+        }
 
-		public static long GetInt64Property(this IGeckoObjectWrapper thisObj, string propertyName)
-		{
-			long value;
-			using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
-			{
-				if (propertyValue.AsInt64(out value))
-					return value;
-			}
-			throw new InvalidCastException();
-		}
+        public static void SetInt32Property(this IGeckoObjectWrapper thisObj, string propertyName, int value)
+        {
+            using (var thisObjArg = new Variant(thisObj))
+            {
+                GeckoJavascriptBridge.GetService().SetProperty(thisObjArg, propertyName, value);
+            }
+        }
+
+        public static long GetInt64Property(this IGeckoObjectWrapper thisObj, string propertyName)
+        {
+            long value;
+            using (Variant propertyValue = GeckoJavascriptBridge.GetService().GetProperty(thisObj, propertyName))
+            {
+                if (propertyValue.AsInt64(out value))
+                    return value;
+            }
+            throw new InvalidCastException();
+        }
 
 
-		/// <summary>
-		/// Returns HWND of window
-		/// </summary>
-		/// <param name="window"></param>
-		/// <returns></returns>
-		public static IntPtr GetHandle(this nsIXULWindow window)
+        /// <summary>
+        /// Returns HWND of window
+        /// </summary>
+        /// <param name="window"></param>
+        /// <returns></returns>
+        public static IntPtr GetHandle(this nsIXULWindow window)
 		{
 			string nativeHandle;
 			nsIBaseWindow baseWindow = null;

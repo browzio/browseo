@@ -54,5 +54,26 @@ namespace Gecko.Windows
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool IsChild(IntPtr hWndParent, IntPtr hWnd);
 
-	}
+        public const int GCL_HBRBACKGROUND = -10;
+        public const int COLOR_WINDOW = 5;
+
+        [DllImport("user32.dll", EntryPoint = "SetClassLong")]
+        public static extern uint SetClassLongPtr32(IntPtr hWnd, int nIndex, uint dwNewLong);
+
+        [DllImport("user32.dll", EntryPoint = "SetClassLongPtr")]
+        public static extern IntPtr SetClassLongPtr64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetSysColorBrush(int nIndex);
+
+        public static IntPtr SetClassLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong)
+        {
+            //check for x64
+            if (IntPtr.Size > 4)
+                return SetClassLongPtr64(hWnd, nIndex, dwNewLong);
+            else
+                return new IntPtr(SetClassLongPtr32(hWnd, nIndex, unchecked((uint)dwNewLong.ToInt32())));
+        }
+
+    }
 }

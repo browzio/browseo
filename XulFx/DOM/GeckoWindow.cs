@@ -1,4 +1,5 @@
-﻿using Gecko.Interfaces;
+﻿using Gecko.GUI;
+using Gecko.Interfaces;
 using Gecko.Interop;
 using Gecko.IO;
 using Gecko.Javascript;
@@ -64,30 +65,30 @@ namespace Gecko.DOM
 			}
 		}
 
-		private nsIXulfxDOMWindowHelper Helper
-		{
-			get
-			{
-				if (_helper == null)
-				{
-					// It will be thrown ObjectDisposedException, if the object is destroyed.
-					mozIDOMWindowProxy window = this.QueryInterface<mozIDOMWindowProxy>();
-					try
-					{
-						var helper = Xpcom.CreateInstance<nsIXulfxDOMWindowHelper>(Contracts.XulfxDOMWindow);
-						helper.Init(window);
-						_helper = helper;
-					}
-					finally
-					{
-						Xpcom.FreeComObject(ref window);
-					}
-				}
-				return _helper;
-			}
-		}
+        public nsIXulfxDOMWindowHelper Helper
+        {
+            get
+            {
+                if (_helper == null)
+                {
+                    // It will be thrown ObjectDisposedException, if the object is destroyed.
+                    mozIDOMWindowProxy window = this.QueryInterface<mozIDOMWindowProxy>();
+                    try
+                    {
+                        var helper = Xpcom.CreateInstance<nsIXulfxDOMWindowHelper>(Contracts.XulfxDOMWindow);
+                        helper.Init(window);
+                        _helper = helper;
+                    }
+                    finally
+                    {
+                        Xpcom.FreeComObject(ref window);
+                    }
+                }
+                return _helper;
+            }
+        }
 
-		public GeckoWindowUtils WindowUtils
+        public GeckoWindowUtils WindowUtils
 		{
 			get
 			{
@@ -109,6 +110,7 @@ namespace Gecko.DOM
 		public GeckoDocument Document
 		{
 			get { return Helper.GetDocumentAttribute().Wrap(GeckoDocument.Create); }
+            //get { return this.QueryInterface<nsIDOMDocument>().Wrap(GeckoDocument.Create); }
 		}
 
 		/// <summary>
@@ -710,7 +712,7 @@ namespace Gecko.DOM
 		/// <returns></returns>
 		public string Evaluate(string scriptCode)
 		{
-			return GeckoJavascriptBridge.GetService().EvaluateInWindow(this, scriptCode).CastToString();
+            return "";// GeckoJavascriptBridge.GetService().EvaluateInWindow(this, scriptCode).CastToString();
 		}
 
 		/// <summary>
@@ -849,6 +851,5 @@ namespace Gecko.DOM
 		{
 			get { return Helper.GetPerformanceAttribute().Wrap(GeckoPerformance.Create); }
 		}
-
-	}
+    }
 }

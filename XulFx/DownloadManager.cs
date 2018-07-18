@@ -489,7 +489,8 @@ namespace Gecko
 		{
 			Xpcom.RegisterInstance(typeof(nsIHelperAppLauncherDialog).GUID, typeof(DownloadManager).Name, Contracts.HelperAppLauncherDialog, new DownloadManager());
 			
-			var dlh = Xpcom.GetService<nsIRunnable>(Contracts.XulfxDownloadHelper);
+			var dlh = Xpcom.GetService<nsIRunnable>("");
+            //var dlh = Xpcom.GetService<nsIRunnable>(Contracts.XulfxDownloadHelper);
 			try
 			{
 				dlh.Run();
@@ -502,7 +503,8 @@ namespace Gecko
 
 		public static void Shutdown()
 		{
-			nsICancelable dlh = Xpcom.GetService<nsICancelable>(Contracts.XulfxDownloadHelper);
+			//nsICancelable dlh = Xpcom.GetService<nsICancelable>(Contracts.XulfxDownloadHelper);
+            nsICancelable dlh = Xpcom.GetService<nsICancelable>("");
 			try
 			{
 				dlh.Cancel(GeckoError.NS_ERROR_ABORT);

@@ -8,4 +8,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("8547d29f-7ec3-40d9-ba80-3623382533fc")]
+[assembly: Guid("a179b76e-f263-45cd-91cf-68dcd2141c7d")]

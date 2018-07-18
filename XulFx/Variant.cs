@@ -437,7 +437,7 @@ namespace Gecko
 				return null;
 			if (dataType.GetIsObject())
 			{
-				return GeckoJavascriptBridge.GetService().ConvertToString(this);
+				//return GeckoJavascriptBridge.GetService().ConvertToString(this);
 			}
 			return Instance.GetAsWString();
 		}

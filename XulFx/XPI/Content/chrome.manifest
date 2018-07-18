@@ -1,29 +1,45 @@
 content xulfx chrome/content/
-skin xulfx classic/1.0 chrome/skin/classic/
-resource xulfx ./
-locale branding en-US chrome/branding/locale/
+skin xulfx classic/1.0 chrome/skin/
 
 interfaces components/interfaces.xpt
+
 manifest components/helpers/chrome.manifest
 
 component {917d0499-0a70-4a64-a0c8-013bd2a1251e} components/GeckoScriptBridge.js
 contract @gecko/scriptbridge;1 {917d0499-0a70-4a64-a0c8-013bd2a1251e}
 category profile-after-change nsIGeckoScriptBridge @gecko/scriptbridge;1
 
-component {515777e1-8e19-4be9-9d0d-8ca2efdcb5a2} components/Xulfx.js
-contract @xulfx/xulfx;1 {515777e1-8e19-4be9-9d0d-8ca2efdcb5a2}
-category profile-after-change Xulfx @xulfx/xulfx;1
 
-component {3275a21c-1ec4-11e7-93ae-92361f002671} components/XulfxDownloadHelper.js
-contract @xulfx/download/helper;1 {3275a21c-1ec4-11e7-93ae-92361f002671}
-category profile-after-change XulfxDownloadHelper @xulfx/download/helper;1
 
-component {2b44817e-2159-11e7-93ae-92361f002671} components/XulfxCookieHelper.js
-contract @xulfx/cookie/helper;1 {2b44817e-2159-11e7-93ae-92361f002671}
 
-component {f805ca48-2158-11e7-93ae-92361f002671} components/XulfxEventHelper.js
-contract @xulfx/event/helper;1 {f805ca48-2158-11e7-93ae-92361f002671}
+#content xulfx chrome/content/
+#skin xulfx classic/1.0 chrome/skin/
+#
+#locale branding en-US chrome/branding/locale/
+#
+#interfaces components/interfaces.xpt
+#manifest components/helpers/chrome.manifest
+#
+#component {917d0499-0a70-4a64-a0c8-013bd2a1251e} components/GeckoScriptBridge.js
+#contract @gecko/scriptbridge;1 {917d0499-0a70-4a64-a0c8-013bd2a1251e}
+#category profile-after-change nsIGeckoScriptBridge @gecko/scriptbridge;1
+#
+#component {515777e1-8e19-4be9-9d0d-8ca2efdcb5a2} components/Xulfx.js
+#contract @xulfx/xulfx;1 {515777e1-8e19-4be9-9d0d-8ca2efdcb5a2}
+#category profile-after-change Xulfx @xulfx/xulfx;1
+#
+#component {3275a21c-1ec4-11e7-93ae-92361f002671} components/XulfxDownloadHelper.js
+#contract @xulfx/download/helper;1 {3275a21c-1ec4-11e7-93ae-92361f002671}
+#category profile-after-change XulfxDownloadHelper @xulfx/download/helper;1
+#
+#component {2b44817e-2159-11e7-93ae-92361f002671} components/XulfxCookieHelper.js
+#contract @xulfx/cookie/helper;1 {2b44817e-2159-11e7-93ae-92361f002671}
+#
+#component {f805ca48-2158-11e7-93ae-92361f002671} components/XulfxEventHelper.js
+#contract @xulfx/event/helper;1 {f805ca48-2158-11e7-93ae-92361f002671}
+#
+#component {d2435f89-6709-4e00-b0b6-31ceae45c192} components/XPath.js
+#contract @xulfx/xpath/evaluator;1 {d2435f89-6709-4e00-b0b6-31ceae45c192}
 
-component {d2435f89-6709-4e00-b0b6-31ceae45c192} components/XPath.js
-contract @xulfx/xpath/evaluator;1 {d2435f89-6709-4e00-b0b6-31ceae45c192}
+
 

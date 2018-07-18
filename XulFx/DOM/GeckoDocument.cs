@@ -238,7 +238,7 @@ namespace Gecko.DOM
 			{
 				string uri = nsString.Get(Instance.GetDocumentURIAttribute);
 				if(string.IsNullOrEmpty(uri))
-					return "about:blank";
+					return "about:newTab";
 				return uri;
 			}
 		}
@@ -581,31 +581,31 @@ namespace Gecko.DOM
 		/// <param name="contextNode">The contextNode specifies the context node for the query (see the [http://www.w3.org/TR/xpath XPath specification). It's common to pass document as the context node.</param>
 		/// <param name="resultType">The type of result XPathResult to return.</param>
 		/// <returns></returns>
-		public GeckoXPathResult Evaluate(string xpathExpression, GeckoNode contextNode, GeckoXPathResultType resultType)
-		{
-			if (xpathExpression == null)
-				throw new ArgumentNullException("xpathExpression");
-			if (contextNode == null)
-				throw new ArgumentNullException("contextNode");
+		//public GeckoXPathResult Evaluate(string xpathExpression, GeckoNode contextNode, GeckoXPathResultType resultType)
+		//{
+		//	if (xpathExpression == null)
+		//		throw new ArgumentNullException("xpathExpression");
+		//	if (contextNode == null)
+		//		throw new ArgumentNullException("contextNode");
 
-			nsISupports resolver = null;
-			nsIXulfxDOMXPathEvaluator evaluator = null;
-			nsAString expression = new nsAString(xpathExpression);
-			try
-			{
-				evaluator = Xpcom.CreateInstance<nsIXulfxDOMXPathEvaluator>("@xulfx/xpath/evaluator;1");
-				evaluator.Init(this.Instance);
-				//resolver = evaluator.CreateNSResolver(contextNode.Instance);
-				resolver = contextNode.QueryInterface<nsISupports>();
-				return new GeckoXPathResult(evaluator.Evaluate(expression, contextNode.Instance, resolver, (ushort)resultType));
-			}
-			finally
-			{
-				expression.Dispose();
-				Xpcom.FreeComObject(ref resolver);
-				Xpcom.FreeComObject(ref evaluator);
-			}
-		}
+		//	nsISupports resolver = null;
+		//	nsIXulfxDOMXPathEvaluator evaluator = null;
+		//	nsAString expression = new nsAString(xpathExpression);
+		//	try
+		//	{
+		//		evaluator = Xpcom.CreateInstance<nsIXulfxDOMXPathEvaluator>("@xulfx/xpath/evaluator;1");
+		//		evaluator.Init(this.Instance);
+		//		//resolver = evaluator.CreateNSResolver(contextNode.Instance);
+		//		resolver = contextNode.QueryInterface<nsISupports>();
+		//		return new GeckoXPathResult(evaluator.Evaluate(expression, contextNode.Instance, resolver, (ushort)resultType));
+		//	}
+		//	finally
+		//	{
+		//		expression.Dispose();
+		//		Xpcom.FreeComObject(ref resolver);
+		//		Xpcom.FreeComObject(ref evaluator);
+		//	}
+		//}
 
 		/// <summary>
 		/// Retrieves an anonymous descendant with a specified attribute value.

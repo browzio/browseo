@@ -7,6 +7,9 @@ using Gecko.DOM;
 
 namespace Gecko
 {
+    /// <summary>
+    /// blaaahhhhhhh
+    /// </summary>
 	public sealed class GeckoWebNavigation : ComObject<nsIWebNavigation>, IGeckoObjectWrapper
 	{
 		public static GeckoWebNavigation Create(nsIWebNavigation instance)

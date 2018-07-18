@@ -1,6 +1,7 @@
 "use strict"
 const { classes: Cc, utils: Cu, interfaces: Ci, results: Cr } = Components;
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+Cu.import("resource://gre/modules/Services.jsm");
 
 function XulfxDOMWindowHelper() {
 	this.instance = null
@@ -12,7 +13,7 @@ XulfxDOMWindowHelper.prototype = {
 	QueryInterface: XPCOMUtils.generateQI([Ci.nsIXulfxDOMWindowHelper]),
 
 	init: function(window) {
-		this.instance = window
+	    this.instance = window;
 	},
 	setCursor: function(cursor) {
 		this.instance.setCursor(cursor)
@@ -308,3 +309,13 @@ XulfxDOMWindowCollection.prototype = {
 
 
 var NSGetFactory = XPCOMUtils.generateNSGetFactory([XulfxDOMWindowHelper]);
+
+
+
+
+
+
+
+
+
+

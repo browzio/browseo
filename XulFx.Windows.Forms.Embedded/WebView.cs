@@ -821,7 +821,14 @@ namespace Gecko.Windows
 			}
 		}
 
-		#endregion
 
-	}
+
+        #endregion
+
+
+        public void SizeShellToWithLimit(int aDesiredWidth, int aDesiredHeight, int shellItemWidth, int shellItemHeight)
+        {
+            
+        }
+    }
 }

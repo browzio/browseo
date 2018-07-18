@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gecko</RootNamespace>
     <AssemblyName>XulFx</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -17,7 +17,8 @@
     <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
     <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
     <SccProvider>Mercurial Source Control Package</SccProvider>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -31,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\bin\Debug\XulFx.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,20 +43,55 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\bin\Release\XulFx.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>xulfx.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Debug\XulFx.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\bin\Release\XulFx.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.DwayneNeed">
+      <HintPath>..\..\..\..\..\..\..\..\..\Downloads\MicrosoftDwayneNeed\sourceCode\sourceCode\Microsoft.DwayneNeed\Microsoft.DwayneNeed\bin\Debug\Microsoft.DwayneNeed.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DwayneNeed.Win32">
+      <HintPath>..\..\..\..\..\..\..\..\..\Downloads\MicrosoftDwayneNeed\sourceCode\sourceCode\Microsoft.DwayneNeed\Microsoft.DwayneNeed.Win32\bin\Debug\Microsoft.DwayneNeed.Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\LoadContextInfo.cs" />
@@ -112,6 +149,7 @@
     <Compile Include="GeckoInterfaces\Generated\nsIWellKnownOpportunisticUtils.cs" />
     <Compile Include="GeckoInterfaces\Generated\nsIWindowlessBrowser.cs" />
     <Compile Include="GeckoInterfaces\Generated\xpctest_utils.cs" />
+    <Compile Include="GUI\PanelUIListener.cs" />
     <Compile Include="TagNameComparer.cs" />
     <Compile Include="GeckoInterfaces\Generated\amIAddonPathService.cs">
       <SubType>Code</SubType>
@@ -3256,14 +3294,15 @@
     <Compile Include="WebAPI\GeckoPerformanceTiming.cs" />
     <Compile Include="WebAPI\GeckoPerformance.cs" />
     <Compile Include="WebAPI\PerformanceNavigationType.cs" />
-    <Content Include="XPI\idl\nsIXulfxDictionary.idl" />
-    <Compile Include="XPI\Interfaces\Contracts.cs" />
-    <Compile Include="XPI\Interfaces\Helpers\nsIXulfxDOMWindowHelper.cs" />
-    <Compile Include="XPI\Interfaces\Helpers\nsIXulfxWEBAPIPerfomanceHelper.cs" />
-    <Compile Include="XPI\Interfaces\nsIXulfxCookieManager.cs" />
-    <Compile Include="XPI\Interfaces\nsIXulfxDictionary.cs" />
-    <Compile Include="XPI\Interfaces\nsIXulfxDOMXPathEvaluator.cs" />
-    <Compile Include="XPI\Interfaces\nsIXulfxEventHelper.cs" />
+    <Compile Include="IXpcomListenerSevice.cs" />
+    <Compile Include="WebView.Windowless.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebView.Windowless.Glue.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="xpiFX\interfaces\nsIGeckoScriptBridge.cs" />
+    <Compile Include="xpiFX\interfaces\nsIXulfxDOMWindowHelper.cs" />
     <Compile Include="XulfxAppInfo.cs" />
     <Compile Include="Cache\CacheStorage.cs" />
     <Compile Include="Cache\CacheStorageConsumptionObserverBase.cs" />
@@ -3347,9 +3386,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebView.Gecko.PropertiesSpecial.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WebView.Windowless.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\HistoryService.cs" />
@@ -3513,15 +3549,11 @@
     <Compile Include="Utils.cs" />
     <Compile Include="UUID.cs" />
     <Compile Include="Variant.cs" />
-    <Compile Include="WebView.Windowless.Glue.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="WindowCreator.cs" />
     <Compile Include="Xpcom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.Version.cs" />
     <Compile Include="XpcomIdleEvent.cs" />
-    <Compile Include="XPI\Interfaces\nsIGeckoScriptBridge.cs" />
     <Compile Include="XulfxSingletonFactory.cs" />
     <Compile Include="XULRunnerLocator.cs" />
   </ItemGroup>
@@ -3530,41 +3562,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="XPI\build-all.bat" />
-    <None Include="XPI\build-helpers.bat" />
-    <None Include="XPI\build-xpt.bat" />
-    <None Include="XPI\Content\chrome.manifest" />
-    <None Include="XPI\Content\chrome\branding\locale\brand.dtd" />
-    <None Include="XPI\Content\chrome\content\window.xul">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="XPI\Content\components\helpers\auto.manifest" />
-    <None Include="XPI\Content\components\helpers\chrome.manifest" />
-    <None Include="XPI\Content\install.rdf" />
+    <None Include="xpiFX\build-xpiFX.bat" />
     <None Include="XulFx.config" />
-    <None Include="xulfx.snk" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="map.xml" />
-    <Content Include="XPI\Content\components\GeckoScriptBridge.js" />
-    <Content Include="XPI\Content\components\helpers\generated\XulfxDOMWindowHelper.js" />
-    <Content Include="XPI\Content\components\helpers\generated\XulfxWEBAPIPerfomanceHelper.js" />
-    <Content Include="XPI\Content\components\XPath.js" />
-    <Content Include="XPI\Content\components\Xulfx.js" />
-    <Content Include="XPI\Content\components\XulfxCookieHelper.js" />
-    <Content Include="XPI\Content\components\XulfxDownloadHelper.js" />
-    <Content Include="XPI\Content\components\XulfxEventHelper.js" />
-    <Content Include="XPI\idl\helpers\auto\nsIXulfxWEBAPIPerfomanceHelper.idl" />
-    <Content Include="XPI\idl\nsIDOMWindowCollection.idl" />
-    <Content Include="XPI\idl\nsIGeckoScriptBridge.idl" />
-    <Content Include="XPI\idl\helpers\auto\nsIXulfxDOMWindowHelper.idl" />
-    <Content Include="XPI\idl\nsIXulfxCookieManager.idl" />
-    <Content Include="XPI\idl\nsIXulfxDOMXPathEvaluator.idl" />
-    <Content Include="XPI\idl\nsIXulfxEventHelper.idl" />
+    <Content Include="xpiFX\idl\nsIGeckoScriptBridge.idl" />
+    <Content Include="xpiFX\idl\nsIXulfxDOMWindowHelper.idl" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XPI\Content\modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set PATH="$(SolutionDir)packages/7-Zip.CommandLine.9.20.0/tools"

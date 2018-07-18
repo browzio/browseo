@@ -4,28 +4,28 @@ using Gecko.Interop;
 
 namespace Gecko.WebAPI
 {
-	public sealed class GeckoPerformanceNavigation: ComObject<nsIXulfxPerformanceNavigation>, IGeckoObjectWrapper
-	{
-		public static GeckoPerformanceNavigation Create(nsIXulfxPerformanceNavigation instance)
-		{
-			return new GeckoPerformanceNavigation(instance);
-		}
+	//public sealed class GeckoPerformanceNavigation: ComObject<nsIXulfxPerformanceNavigation>, IGeckoObjectWrapper
+	//{
+	//	public static GeckoPerformanceNavigation Create(nsIXulfxPerformanceNavigation instance)
+	//	{
+	//		return new GeckoPerformanceNavigation(instance);
+	//	}
 
-		private GeckoPerformanceNavigation(nsIXulfxPerformanceNavigation instance)
-			: base(instance)
-		{
+	//	private GeckoPerformanceNavigation(nsIXulfxPerformanceNavigation instance)
+	//		: base(instance)
+	//	{
 
-		}
+	//	}
 
-		public PerformanceNavigationType Type
-		{
-			get { return (PerformanceNavigationType)Instance.GetTypeAttribute(); }
-		}
+	//	public PerformanceNavigationType Type
+	//	{
+	//		get { return (PerformanceNavigationType)Instance.GetTypeAttribute(); }
+	//	}
 
-		public int RedirectCount
-		{
-			get { return Instance.GetRedirectCountAttribute(); }
-		}
+	//	public int RedirectCount
+	//	{
+	//		get { return Instance.GetRedirectCountAttribute(); }
+	//	}
 
-	}
+	//}
 }

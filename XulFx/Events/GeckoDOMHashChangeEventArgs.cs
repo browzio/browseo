@@ -30,7 +30,8 @@ namespace Gecko
 
 		private string GetUri(string propName)
 		{
-			return Gecko.Javascript.GeckoJavascriptBridge.GetService().GetProperty(this.Instance, propName).ToString();
+            return "about:home";
+			//return Gecko.Javascript.GeckoJavascriptBridge.GetService().GetProperty(this.Instance, propName).ToString();
 		}
 
 	}

@@ -16,6 +16,7 @@ using Gecko.DOM;
 using Gecko.DOM.XUL;
 using System.Runtime.InteropServices;
 using Gecko.Javascript;
+using Gecko.CustomMarshalers;
 
 namespace Gecko.Windows
 {
@@ -23,7 +24,72 @@ namespace Gecko.Windows
 		IEventedWebView,
 		nsIContextMenuListener2
     {
-		private static ContextMenuStrip DefaultContextMenu;
+        protected GeckoWebNavigation WebNav
+        {
+            get
+            {
+                return this.Window.QueryInterface<nsIWebNavigation>().Wrap(GeckoWebNavigation.Create);
+            }
+        }
+
+        private void CreateContentView()
+        {
+            IntPtr hwndView = this.Handle;
+
+            _contentView = GetOrCreateGlobalView("_contentView", out _contentViewElement);
+            //Debug.Assert(_contentView != null, "_contentView is null");
+            if (_contentView == null)
+                _contentView = _widget.View;
+
+            nsIDocShell docShell = null;
+            nsIWebProgress progress = null;
+            try
+            {
+                docShell = _widget.View.QueryInterface<nsIDocShell>();
+
+                progress = Xpcom.QueryInterface<nsIWebProgress>(docShell);
+                progress.AddProgressListener(_wbGlue, (uint)(nsIWebProgressConsts.NOTIFY_STATE_ALL | nsIWebProgressConsts.NOTIFY_ALL));
+            }
+            finally
+            {
+                Xpcom.FreeComObject(ref progress);
+                Xpcom.FreeComObject(ref docShell);
+            }
+
+            _eventTarget = _contentView.QueryInterface<nsIDocShell>().GetChromeEventHandlerAttribute().Wrap(GeckoDOMEventTarget.Create);
+            if (_eventTarget != null)
+            {
+                foreach (string eventName in this.HandledDOMEvents)
+                {
+                    _eventTarget.AddEventListener(eventName, _wbGlue, true, true, 2);
+                }
+            }
+        }
+
+
+
+        protected void AssertNotPreview()
+        {
+            if (_previewMode)
+                throw new InvalidOperationException();
+        }
+
+        #region IWebView
+
+        [BrowsableAttribute(false)]
+        public virtual GeckoWindow Window
+        {
+            get
+            {
+                if (this.Handle != IntPtr.Zero) // create control
+                    return _contentView;
+                return null;
+            }
+        }
+
+        #endregion
+
+        private static ContextMenuStrip DefaultContextMenu;
 		private Uri _url;
 		private GeckoXULWindow _widget;
 		private GeckoWindow _contentView;
@@ -142,8 +208,7 @@ namespace Gecko.Windows
 				try
 				{
 #endif
-
-					_wbGlue = new WebBrowserGlue(this);
+                    _wbGlue = new WebBrowserGlue(this);
 					_widget = new GeckoXULWindow();
 					_widget.WaitUntilChromeLoad();
 					_widget.Instance.SetXULBrowserWindowAttribute(_wbGlue);
@@ -169,8 +234,11 @@ namespace Gecko.Windows
 
 					_widget.Show();
 					NativeMethods.ShowWindow(hwndView, WinApi.SW_SHOWNA);
+
+
+                    // Services.obs.notifyObservers(null, "lightweight-theme-changed", null);
 #if DEBUG
-				}
+                }
 				catch (Exception ex)
 				{
 					if (Debugger.IsAttached)
@@ -262,60 +330,320 @@ namespace Gecko.Windows
 			return false;
 		}
 
-		protected GeckoWindow GetOrCreateGlobalView(string viewName, out GeckoXULElement browser)
-		{
-			GeckoWindow viewWindow = Widget.View;
-			GeckoDocument xulDocument = viewWindow.Document;
-			Debug.Assert(xulDocument != null, "xulDocument is null");
-			Debug.Assert(xulDocument is GeckoXULDocument, "xulDocument is not GeckoXULDocument");
+        protected GeckoWindow GetOrCreateGlobalView(string viewName, out GeckoXULElement browser)
+        {
+            viewName = "content";
 
-			// wait document loading
-			while (xulDocument.DocumentElement == null)
-				Xpcom.DoEvents(false);
+            GeckoWindow viewWindow = Widget.View;
+            GeckoDocument xulDocument = viewWindow.Document;
+            Debug.Assert(xulDocument != null, "xulDocument is null");
+            Debug.Assert(xulDocument is GeckoXULDocument, "xulDocument is not GeckoXULDocument");
 
-			GeckoWindow view = null;
-			browser = (GeckoXULElement)xulDocument.GetElementById(viewName);
-			if (browser != null)
-			{
-				return browser.GetProperty<nsIDOMWindow>("docShell").Wrap(GeckoWindow.Create);
-			}
+            // wait document loading
+            while (xulDocument.DocumentElement == null)
+                Xpcom.DoEvents(false);
 
-			browser = (GeckoXULElement)xulDocument.CreateElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "browser");
-			browser.Flex = "1";
-			browser.SetAttribute("id", viewName);
-			browser.SetAttribute("type", "content-targetable");
-			xulDocument.DocumentElement.AppendChild(browser);
 
-			GeckoJavascriptBridge js = GeckoJavascriptBridge.GetService();
-			nsIDocShell docShell = null;
-			try
-			{
-				while (docShell == null)
-				{
-					using (Variant value = js.GetProperty(browser, "docShell"))
-					{
-						if (value.DataType == VariantDataType.Interface || value.DataType == VariantDataType.InterfaceIs)
-						{
-							object dsObj = value.ToObject();
-							docShell = Xpcom.QueryInterface<nsIDocShell>(dsObj);
-							Xpcom.FreeComObject(ref dsObj);
-							if(docShell != null)
-								break;
-						}
-					}
-					Xpcom.DoEvents(false);
-				}
-				docShell.SetIsAppTabAttribute(true);
-				view = Xpcom.QueryInterface<nsIDOMWindow>(docShell).Wrap(GeckoWindow.Create);
-			}
-			finally
-			{
-				Xpcom.FreeComObject(ref docShell);
-			}
-			return view;
-		}
+            try
+            {
+                var mainWindow = xulDocument.GetElementById("main-window") as GeckoXULElement;
+                if (mainWindow != null)
+                {
+                    //mainWindow.SetProperty("persist", "screenX screenY width height");
+                    mainWindow.SetProperty("fullscreenbutton", "false");
+                    mainWindow.SetProperty("sizemode", "maximized");
+                    //mainWindow.SetProperty("hidechrome", "true");
+                    //mainWindow.SetProperty("inactivetitlebarcolor", "green");
+                }
 
-		protected virtual void OnHandleDomEvent(GeckoDOMEventArgs e)
+                //titlebar-placeholder
+                var titlebar = xulDocument.GetElementById("titlebar") as GeckoXULElement;
+                if (titlebar != null)
+                {
+                    titlebar.Hidden = true;
+                }
+
+
+                //btns
+                var btn1 = xulDocument.GetElementById("restore-button") as GeckoXULElement;
+                if (btn1 != null)
+                {
+                    btn1.Hidden = true;
+                }
+                var btn2 = xulDocument.GetElementById("close-button") as GeckoXULElement;
+                if (btn2 != null)
+                {
+                    btn2.Hidden = true;
+                }
+                var btn3 = xulDocument.GetElementById("minimize-button") as GeckoXULElement;
+                if (btn3 != null)
+                {
+                    btn3.Hidden = true;
+                }
+
+
+                //open menu button PanelUI inside nav-bar PanelUI-popup PanelUI-button PanelUI-menu-button
+                var PanelUIpopup = xulDocument.GetElementById("PanelUI-popup") as GeckoXULElement;
+                //using(var result = new nsAString(""))
+                //{
+                //    using (var name = new nsAString("list-style-image"))
+                //    {
+                //        PanelUIpopup.ComputedStyle.Instance.GetPropertyPriority(name, result);
+                //    }
+                //}
+                
+                GeckoDOMEventTarget paneluiToolbarbuttonEventTarget =
+                    Xpcom.QueryInterface<nsIDOMEventTarget>(PanelUIpopup.Instance).Wrap(GeckoDOMEventTarget.Create);
+                paneluiToolbarbuttonEventTarget.AddEventListener("popupshown", new PanelUIListener(Widget.View, viewWindow.Document), true, true, 2);
+
+
+                //PanelUI-button
+                var paneluiIMacroItem = (GeckoXULElement)xulDocument.CreateElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "toolbaritem");
+                paneluiIMacroItem.SetAttribute("id", "paneluiIMacroItem");
+
+                //PanelUI-menu-button
+                var paneluiIMacroButton = (GeckoXULElement)xulDocument.CreateElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "toolbarbutton");
+                paneluiIMacroButton.SetAttribute("id", "paneluiIMacroButton");
+                paneluiIMacroButton.SetAttribute("consumeanchor", "paneluiIMacroItem");
+                paneluiIMacroButton.SetAttribute("tooltiptext", "Open IA Macros");
+                paneluiIMacroButton.SetAttribute("class", "toolbarbutton-1 chromeclass-toolbar-additional");
+                paneluiIMacroButton.SetAttribute("style", "list-style-image: url(\"chrome://xulfx/skin/browseo.png\"); -moz-image-region: auto;");
+                //using (var name = new nsAString("list-style-image"))
+                //{
+                //    using (var value = new nsAString("url(\"chrome://browser/skin/Toolbar.png\")"))
+                //    {
+                //        using (var priority = new nsAString("1"))
+                //        {
+                //            paneluiIMacroButton.ComputedStyle.Instance.SetProperty(name, value, null);
+                //        }
+                //    }
+                //}
+
+                paneluiIMacroItem.AppendChild(paneluiIMacroButton);
+
+                GeckoDOMEventTarget paneluiIMacroButtonEventTarget =
+                    Xpcom.QueryInterface<nsIDOMEventTarget>(paneluiIMacroButton.Instance).Wrap(GeckoDOMEventTarget.Create);
+                paneluiIMacroButtonEventTarget.AddEventListener("command", new PanelUIListener(Widget.View, viewWindow.Document,this), true, true, 2);
+                
+                var navBar = xulDocument.GetElementById("nav-bar") as GeckoXULElement;
+                navBar.AppendChild(paneluiIMacroItem);
+
+                //tab-view-deck
+                var toolbar = xulDocument.GetElementById("toolbar-menubar") as GeckoXULElement;
+                if (toolbar != null)
+                {
+                    toolbar.Hidden = true;
+                }
+
+
+                //var browserObj = xulDocument.GetElementById("browser") as GeckoXULElement;
+                //if (browserObj != null)
+                //{
+                //    browserObj.Height = "" + browserObj.ClientHeight + browserObj.BoxObject.Y;
+                //}
+
+
+
+                //var xulDoc = Widget.View.Document as GeckoXULDocument;
+                //if (xulDoc != null)
+                //{
+                //    var dispatchr = xulDoc.Instance.GetCommandDispatcherAttribute();
+                //    var controller = dispatchr.GetControllers();
+                //   var count =  controller.GetControllerCount();
+                //    var oneController = controller.GetControllerAt(0);
+                //    var isenabled = oneController.IsCommandEnabled("View:FullScreen");
+                //}
+
+                //var winddocShell = Xpcom.QueryInterface<nsICommandManager>(browserObj.Instance);
+                //if (winddocShell != null)
+                //{
+                //    nsICommandManager commandMan = null;
+                //    try
+                //    {
+                //        commandMan = Xpcom.QueryInterface<nsICommandManager>(winddocShell);
+                //        if (commandMan != null)
+                //        {
+                //            commandMan.AddCommandObserver(new commandObserver(), "View:FullScreen");
+                //        }
+                //    }
+                //    catch (COMException e)
+                //    {
+                //        if (e.ErrorCode != GeckoError.NS_ERROR_FAILURE)
+                //            throw;
+                //    }
+                //    finally
+                //    {
+                //        Xpcom.FreeComObject(ref commandMan);
+                //        Xpcom.FreeComObject(ref winddocShell);
+                //    }
+                //}
+            }
+            catch
+            {
+
+            }
+
+
+            GeckoWindow view = null;
+            browser = (GeckoXULElement)xulDocument.GetElementById(viewName);
+            if (browser != null)
+            {
+                var window = browser.GetProperty<nsIDOMWindow>("docShell").Wrap(GeckoWindow.Create);
+                return window;
+            }
+
+            browser = (GeckoXULElement)xulDocument.CreateElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "browser");
+            browser.Flex = "1";
+            browser.SetAttribute("id", viewName);
+            browser.SetAttribute("type", "content-targetable");
+            xulDocument.DocumentElement.AppendChild(browser);
+
+            GeckoJavascriptBridge js = GeckoJavascriptBridge.GetService();
+            nsIDocShell docShell = null;
+            try
+            {
+                while (docShell == null)
+                {
+                    using (Variant value = js.GetProperty(browser, "docShell"))
+                    {
+                        if (value.DataType == VariantDataType.Interface || value.DataType == VariantDataType.InterfaceIs)
+                        {
+                            object dsObj = value.ToObject();
+                            docShell = Xpcom.QueryInterface<nsIDocShell>(dsObj);
+                            Xpcom.FreeComObject(ref dsObj);
+                            if (docShell != null)
+                                break;
+                        }
+                    }
+                    Xpcom.DoEvents(false);
+                }
+                docShell.SetIsAppTabAttribute(true);
+                view = Xpcom.QueryInterface<nsIDOMWindow>(docShell).Wrap(GeckoWindow.Create);
+            }
+            finally
+            {
+                Xpcom.FreeComObject(ref docShell);
+            }
+            return view;
+        }
+
+        public class PanelUIListener : nsIDOMEventListener
+        {
+            private GeckoDocument xulDocument;
+            private GeckoWindow view;
+            private WebView webView;
+
+            public PanelUIListener(GeckoWindow view, GeckoDocument document)
+            {
+                this.xulDocument = document;
+                this.view = view;
+            }
+
+            public PanelUIListener(GeckoWindow view, GeckoDocument document, WebView webView) : this(view, document)
+            {
+                this.webView = webView;
+            }
+
+            public void HandleEvent([MarshalAs(UnmanagedType.Interface)] nsIDOMEvent @event)
+            {
+                //var PanelUIpopup = xulDocument.GetElementById("PanelUI-menu-button") as GeckoXULElement;
+                //using (var result = new nsAString(""))
+                //{
+                //    using (var name = new nsAString("-moz-image-region"))
+                //    {
+                //        PanelUIpopup.ComputedStyle.Instance.GetPropertyValue(name, result);
+                //    }
+                //}
+
+                //var paneluiIMacroButton = xulDocument.GetElementById("paneluiIMacroButton") as GeckoXULElement;
+                //paneluiIMacroButton.SetAttribute("style", "list-style-image: url(\"chrome://xulfx/skin/browseo.png\"); -moz-image-region: auto;");
+
+                var args = Xpcom.QueryInterface<nsIDOMEvent>(@event).Wrap(GeckoDOMEventArgs.Create);
+
+                switch (args.Type)
+                {
+                    case "popupshown":
+                        var fullscreenBtn = xulDocument.GetElementById("fullscreen-button") as GeckoXULElement;
+                        fullscreenBtn.Hidden = true;
+                        //var e = args.CurrentTarget.CastToGeckoElement();
+
+
+
+                        ////PanelUI-contents
+                        //var contents = xulDocument.GetElementById("PanelUI-contents") as GeckoXULElement;
+                        //foreach (var node in contents.ChildNodes)
+                        //{
+                        //   var id = node.GetStringProperty("id");
+                        //    if(id == "fullscreen-button")
+                        //    {
+
+                        //    }
+                        //}
+
+
+                        //var helper1 = Xpcom.CreateInstance<nsIXulfxDOMWindowHelper>(Contracts.XulfxDOMWindow);
+                        //mozIDOMWindowProxy window = view.QueryInterface<mozIDOMWindowProxy>();
+                        //helper1.Init(window);
+
+                        //var PanelUIopup = xulDocument.GetElementById("PanelUI-popup") as GeckoXULElement;
+                        //PanelUIopup.Hidden = false;
+
+                        //nsIDocShell docShell = view.QueryInterface<nsIDocShell>();
+                        //if (docShell != null)
+                        //{
+                        //    nsICommandManager commandMan = null;
+                        //    try
+                        //    {
+                        //        commandMan = Xpcom.QueryInterface<nsICommandManager>(docShell);
+                        //        if (commandMan != null)
+                        //        {
+                        //            commandMan.DoCommand("", null, null);
+                        //        }
+                        //    }
+                        //    catch (COMException e)
+                        //    {
+                        //        if (e.ErrorCode != GeckoError.NS_ERROR_FAILURE)
+                        //            throw;
+                        //    }
+                        //    finally
+                        //    {
+                        //        Xpcom.FreeComObject(ref commandMan);
+                        //        Xpcom.FreeComObject(ref docShell);
+                        //    }
+                        //}
+
+
+                        // var openPopupCommand = xulDocument.GetElementById("View:FullScreen") as GeckoXULElement;
+                        //  openPopupCommand.DoCommand();
+
+                        break;
+
+                    case "command":
+                        //var width = webView.Width;
+                        //var height = webView.Height;
+                        // webView.Dock = DockStyle.Top;
+
+
+                        // webView.Width = width - 400;
+                        //  webView.Height = height;
+
+
+                        //var browserObj = xulDocument.GetElementById("browser") as GeckoXULElement;
+                        //if (browserObj != null)
+                        //{
+                        //    browserObj.Width = "" + (browserObj.ClientWidth - 100);
+                        //}
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        protected virtual void OnHandleDomEvent(GeckoDOMEventArgs e)
 		{
 			_wbGlue.DispatchDOMEvent(e);
 		}
@@ -350,7 +678,7 @@ namespace Gecko.Windows
 					NativeMethods.PostMessage(m.HWnd, WinApi.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
 					return false;
 				case WinApi.WM_ENABLE:
-					NativeMethods.EnableWindow(this.FindForm().Handle, (long)m.WParam != 0L);
+					    NativeMethods.EnableWindow(this.FindForm().Handle, (long)m.WParam != 0L);
 					return false;
 				case WinApi.WM_WINDOWPOSCHANGING:
 					bool fix = false;

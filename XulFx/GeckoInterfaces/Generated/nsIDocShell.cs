@@ -181,10 +181,10 @@ namespace Gecko.Interfaces
 		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType=MethodCodeType.Runtime)]
 		[return: System.Runtime.InteropServices.MarshalAs(UnmanagedType.Interface)]
 		new nsIDocShellTreeItem FindChildWithName([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(AStringMarshaler))] nsAStringBase aName, [MarshalAs(UnmanagedType.U1)] bool aRecurse, [MarshalAs(UnmanagedType.U1)] bool aSameType, [MarshalAs(UnmanagedType.Interface)] nsIDocShellTreeItem aRequestor, [MarshalAs(UnmanagedType.Interface)] nsIDocShellTreeItem aOriginalRequestor);
-		
-		[PreserveSig]
-		[ThisCallCallingConvention]
-		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType=MethodCodeType.Runtime)]
+
+        [PreserveSig]
+        [ThisCallCallingConvention]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType=MethodCodeType.Runtime)]
 		new System.IntPtr GetDocument();
 		
 		[PreserveSig]

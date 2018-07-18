@@ -1,0 +1,97 @@
+#include "nsISupports.idl"
+#include "nsIVariant.idl"
+#include "nsIDOMWindow.idl"
+#include "nsIRunnable.idl"
+#include "nsIScriptError.idl"
+
+[scriptable, uuid(40d8fd1b-a2a7-4ff9-afa5-fe30c439d7da)]
+interface nsIGeckoFunctionHandler: nsISupports
+{
+	nsIVariant call(in nsIVariant proxy, in wstring aName, in nsIVariant thisArg, in unsigned long aCount, [array, size_is(aCount)] in nsIVariant aArgs);
+	readonly attribute nsIScriptError exception;
+	readonly attribute DOMString errorType;
+	readonly attribute DOMString errorMessage;
+};
+
+[scriptable, uuid(385542df-f3df-4da9-a407-f9275e2e3ff6)]
+interface nsIHarmonyProxyCLRHandler : nsISupports
+{
+	nsIVariant getPrototypeOf(in nsIVariant target);
+	void setPrototypeOf(in nsIVariant target, in nsIVariant prototype);
+	nsIVariant getOwnPropertyDescriptor(in nsIVariant target, in nsIVariant name);
+	nsIVariant ownKeys(in nsIVariant target);
+	bool defineProperty(in nsIVariant target, in nsIVariant name, in nsIVariant propertyDescriptor);
+	bool deleteProperty(in nsIVariant target, in nsIVariant name);
+	bool preventExtensions(in nsIVariant target);
+	bool has(in nsIVariant target, in nsIVariant name);
+	nsIVariant get(in nsIVariant target, in nsIVariant name, in nsIVariant receiver);
+	bool set(in nsIVariant target, in nsIVariant name, in nsIVariant val, in nsIVariant receiver);
+	nsIVariant enumerate(in nsIVariant target);
+	nsIVariant apply(in nsIVariant target, in nsIVariant thisValue, in nsIVariant args);
+	nsIVariant construct(in nsIVariant target, in nsIVariant args);
+	bool isExtensible(in nsIVariant target);
+	wstring toString();
+};
+
+[scriptable, uuid(9823388e-41fa-11e5-a151-feff819cdc9f)]
+interface nsIGeckoScriptBridge: nsISupports
+{
+	nsIVariant evaluateInWindow(in nsIDOMWindow window, in wstring code);
+	nsIVariant createSandbox(in nsIVariant global, in nsIVariant principal, in bool wantComponents);
+	nsIVariant evaluateInSandbox(in nsIVariant sandbox, in wstring code, in wstring filename, in unsigned long line, in bool returnAsString);
+	void disposeSandbox(in nsIVariant sandbox);
+	nsIVariant evaluate(in nsISupports global, in nsIVariant principal, in wstring code, in wstring filename, in unsigned long line, in bool returnAsString);
+	wstring convertToString(in nsIVariant value);
+	nsIVariant getPrototypeOf(in nsIVariant obj);
+	nsIVariant setPrototypeOf(in nsIVariant obj, in nsIVariant prototype);
+	void preventExtensions(in nsIVariant obj);
+	nsIVariant getOwnPropertyDescriptor(in nsIVariant obj, in nsIVariant name);
+	nsIVariant getOwnPropertyNames(in nsIVariant obj);
+	nsIVariant getOwnPropertySymbols(in nsIVariant obj);
+	bool hasOwnObjectProperty(in nsIVariant obj, in nsIVariant name);
+	bool isExtensible(in nsIVariant obj);
+	nsIVariant defineProperty(in nsIVariant obj, in nsIVariant name, in nsIVariant value, in bool aReadonly, in bool aEnumerable, in bool aConfigurable);
+	void defineProperty2(in nsIVariant obj, in nsIVariant name, in nsIVariant propertyDescriptor);
+	nsIVariant setProperty(in nsIVariant obj, in nsIVariant name, in nsIVariant value);
+	nsIVariant getProperty(in nsIVariant obj, in nsIVariant name);
+	nsIVariant setItem(in nsIVariant array, in unsigned long index, in nsIVariant value);
+	nsIVariant getItem(in nsIVariant array, in unsigned long index);
+	void dispatch(in nsIRunnable runnable, in nsIDOMWindow window);
+	nsIVariant createProxy(in nsIVariant obj);
+	nsIVariant declareFunction(in nsIVariant obj, in nsIVariant name, in nsIGeckoFunctionHandler handler, in bool aReadonly, in bool aEnumerable, in bool aConfigurable);
+	nsIVariant call(in nsIVariant func, in nsIVariant thisArg, in unsigned long aCount, [array, size_is(aCount)] in nsIVariant args);
+	nsIVariant callInSandbox(in nsIVariant sandbox, in nsIVariant func, in nsIVariant thisArg, in unsigned long aCount, [array, size_is(aCount)] in nsIVariant args);
+	nsIVariant create(in nsIVariant ctor, in nsIVariant thisArg, in unsigned long aCount, [array, size_is(aCount)] in nsIVariant args);
+	bool deleteProperty(in nsIVariant obj, in nsIVariant name);
+	nsIVariant createObject(in nsIVariant prototype, in nsIVariant scope);
+	nsIVariant createObjectProxy(in nsIVariant obj, in nsIVariant scope, in nsIHarmonyProxyCLRHandler handler, in bool overrideToString);
+	nsIVariant createFunctionProxy(in nsIVariant func, in nsIVariant args, in nsIVariant scope, in nsIHarmonyProxyCLRHandler handler, in bool overrideToString);
+	wstring getType(in nsIVariant value);
+	bool isArray(in nsIVariant value);
+	nsIVariant getPropertyBySymbolName(in nsIVariant obj, in wstring symbolName);
+	void run(in nsIRunnable runnable);
+};
+
+[scriptable, uuid(4b097fc2-d0e7-4aac-82f9-8f5ec94adf5d)]
+interface nsIScriptableComObject: nsISupports
+{
+	const long PROPERTY_GETTER = 0x1;
+	const long PROPERTY_GETTER_LISTENER = 0x2;
+	const long PROPERTY_SETTER = 0x4;
+	const long PROPERTY_SETTER_LISTENER = 0x8;
+	const long PROPERTY_DELETE_LISTENER = 0x10;
+
+	readonly attribute long handlerFlags;
+	void notify(in nsIVariant proxy, in wstring action, in wstring name, in nsIVariant args);
+
+	bool defineProperty(in nsIVariant proxy, in wstring name, in nsIVariant value, in nsIVariant descriptor);
+	bool setProperty(in nsIVariant proxy, in wstring name, in nsIVariant value);
+	nsIVariant getProperty(in nsIVariant proxy, in wstring name);
+};
+
+
+
+%{C++
+ // The contractID for the generic implementation built in to xpcom.
+ #define NS_GECKOSCRIPTBRIDGE_CONTRACTID "@gecko/scriptbridge;1"
+%}

@@ -256,7 +256,7 @@ namespace Gecko
 			data = null;
 			try
 			{
-				data = GeckoJavascriptBridge.GetService().EvaluateToString(global, GeckoPrincipal.SystemPrincipal, code);
+				//data = GeckoJavascriptBridge.GetService().EvaluateToString(global, GeckoPrincipal.SystemPrincipal, code);
 			}
 			catch (GeckoException ex)
 			{

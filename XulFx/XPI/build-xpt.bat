@@ -19,26 +19,14 @@ SET XPTFILES=
 for %%n in ("%BASEPATH%idl\*.idl") do (
 	echo Generating %%~nn.idl...
 	"%MOZSDKDIR%\sdk\bin\typelib.py" "%BASEPATH%idl\%%~nn.idl" -o "%XPTFILESDIR%\%%~nn.xpt" -I "%MOZSDKDIR%\idl"
-	for /f %%i in ("%XPTFILESDIR%\%%~nn.xpt") do (
-		if %%~zi == 0 (
-			echo Failed to generate XPT file for %%~nn.idl.
-			rmdir /Q /S "%XPTFILESDIR%"
-			exit /b 13
-		)
-	)
+
 	SET XPTFILES=!XPTFILES! "%XPTFILESDIR%\%%~nn.xpt"
 )
 
 for %%n in ("%BASEPATH%idl\helpers\auto\*.idl") do (
 	echo Generating %%~nn.idl...
 	"%MOZSDKDIR%\sdk\bin\typelib.py" "%BASEPATH%idl\helpers\auto\%%~nn.idl" -o "%XPTFILESDIR%\%%~nn.xpt" -I "%MOZSDKDIR%\idl"
-	for /f %%i in ("%XPTFILESDIR%\%%~nn.xpt") do (
-		if %%~zi == 0 (
-			echo Failed to generate XPT file for %%~nn.idl.
-			rmdir /Q /S "%XPTFILESDIR%"
-			exit /b 13
-		)
-	)
+
 	SET XPTFILES=!XPTFILES! "%XPTFILESDIR%\%%~nn.xpt"
 )
 

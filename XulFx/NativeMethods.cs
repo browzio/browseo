@@ -6,16 +6,16 @@ using System.Security;
 namespace Gecko
 {
 	[SuppressUnmanagedCodeSecurity]
-	internal static partial class NativeMethods
+	public static partial class NativeMethods
 	{
-		internal const string XPCOM = "xul.dll";
-		internal const string MOZGLUE = "mozglue.dll";
-		internal static readonly string XpcomLib = Xpcom.IsLinux ? "libxul.so" : "xul.dll";
+		public const string XPCOM = "xul.dll";
+		public const string MOZGLUE = "mozglue.dll";
+		public static readonly string XpcomLib = Xpcom.IsLinux ? "libxul.so" : "xul.dll";
 
 		public const int NS_OK = 0;
 
 		[DllImport("libxulfx.so", CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int XulFx_Init();
+		public static extern int XulFx_Init();
 
 		#region XpCom Methods
 		/// <summary>
@@ -27,7 +27,7 @@ namespace Gecko
 		/// <param name="appFileLocationProvider"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_InitXPCOM2([MarshalAs(UnmanagedType.Interface)] out nsIServiceManager serviceManager, [MarshalAs(UnmanagedType.Interface)] nsIFile binDirectory, nsIDirectoryServiceProvider appFileLocationProvider);
+		public static extern int NS_InitXPCOM2([MarshalAs(UnmanagedType.Interface)] out nsIServiceManager serviceManager, [MarshalAs(UnmanagedType.Interface)] nsIFile binDirectory, nsIDirectoryServiceProvider appFileLocationProvider);
 
 		/// <summary>
 		/// Shutdown XPCOM. You must call this method after you are finished
@@ -39,7 +39,7 @@ namespace Gecko
 		/// <param name="serviceManager"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_ShutdownXPCOM(IntPtr serviceManager);
+		public static extern int NS_ShutdownXPCOM(IntPtr serviceManager);
 
 		/// <summary>
 		/// Declaration in nsXPCOM.h
@@ -50,9 +50,9 @@ namespace Gecko
 		/// <param name="result"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_NewLocalFile([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Gecko.CustomMarshalers.AStringMarshaler))] nsAString path, [MarshalAs(UnmanagedType.U1)] bool followLinks, [MarshalAs(UnmanagedType.Interface)] out nsIFile result);
+		public static extern int NS_NewLocalFile([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Gecko.CustomMarshalers.AStringMarshaler))] nsAString path, [MarshalAs(UnmanagedType.U1)] bool followLinks, [MarshalAs(UnmanagedType.Interface)] out nsIFile result);
 		[DllImport(XPCOM, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_NewLocalFile([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Gecko.CustomMarshalers.AStringMarshaler))] nsAString path, [MarshalAs(UnmanagedType.U1)] bool followLinks, out IntPtr result);
+		public static extern int NS_NewLocalFile([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Gecko.CustomMarshalers.AStringMarshaler))] nsAString path, [MarshalAs(UnmanagedType.U1)] bool followLinks, out IntPtr result);
 
 		/// <summary>
 		/// Declaration in nsXPCOM.h
@@ -61,7 +61,7 @@ namespace Gecko
 		/// <param name="componentManager"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_GetComponentManager([MarshalAs(UnmanagedType.Interface)] out nsIComponentManager componentManager);
+		public static extern int NS_GetComponentManager([MarshalAs(UnmanagedType.Interface)] out nsIComponentManager componentManager);
 
 		/// <summary>
 		/// Declaration in nsXPCOM.h
@@ -70,7 +70,7 @@ namespace Gecko
 		/// <param name="componentRegistrar"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int NS_GetComponentRegistrar([MarshalAs(UnmanagedType.Interface)] out nsIComponentRegistrar componentRegistrar);
+		public static extern int NS_GetComponentRegistrar([MarshalAs(UnmanagedType.Interface)] out nsIComponentRegistrar componentRegistrar);
 
 		/// <summary>
 		/// XPCOM_API(void*) NS_Alloc(size_t size);
@@ -78,7 +78,7 @@ namespace Gecko
 		/// <param name="size"></param>
 		/// <returns></returns>
 		[DllImport(MOZGLUE, EntryPoint = "moz_xmalloc", CallingConvention = CallingConvention.Cdecl)]
-		internal static extern IntPtr Alloc(IntPtr size);
+		public static extern IntPtr Alloc(IntPtr size);
 
 		/// <summary>
 		/// XPCOM_API(void*) NS_Realloc(void* ptr, size_t size);
@@ -87,14 +87,14 @@ namespace Gecko
 		/// <param name="size"></param>
 		/// <returns></returns>
 		[DllImport(MOZGLUE, EntryPoint = "moz_xrealloc", CallingConvention = CallingConvention.Cdecl)]
-		internal static extern IntPtr Realloc(IntPtr ptr, IntPtr size);
+		public static extern IntPtr Realloc(IntPtr ptr, IntPtr size);
 
 		/// <summary>
 		/// XPCOM_API(void) NS_Free(void* ptr)
 		/// </summary>
 		/// <param name="ptr"></param>
 		[DllImport(MOZGLUE, EntryPoint = "free", CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Free(IntPtr ptr);
+		public static extern void Free(IntPtr ptr);
 
 		/// <summary>
 		/// Declaration in nsXULAppAPI.h
@@ -104,7 +104,7 @@ namespace Gecko
 		/// <param name="aLocation"></param>
 		/// <returns></returns>
 		[DllImport(XPCOM, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int XRE_AddJarManifestLocation(int aType, [MarshalAs(UnmanagedType.Interface)] nsIFile aLocation);
+		public static extern int XRE_AddJarManifestLocation(int aType, [MarshalAs(UnmanagedType.Interface)] nsIFile aLocation);
 
 		#endregion
 

@@ -9,7 +9,7 @@ namespace Gecko.WebAPI
 	/// </summary>
 	public sealed class GeckoPerformance : ComObject<nsISupports>, IGeckoObjectWrapper
 	{
-		private nsIXulfxWEBAPIPerfomanceHelper _helper;
+		//private nsIXulfxWEBAPIPerfomanceHelper _helper;
 
 		public static GeckoPerformance Create(nsISupports instance)
 		{
@@ -18,37 +18,43 @@ namespace Gecko.WebAPI
 
 		protected override void Dispose(bool disposing)
 		{
-			Xpcom.FreeComObject(ref _helper);
+			//Xpcom.FreeComObject(ref _helper);
 			base.Dispose(disposing);
 		}
 
 		private GeckoPerformance(nsISupports instance)
 			: base(instance)
 		{
-			_helper = Xpcom.CreateInstance<nsIXulfxWEBAPIPerfomanceHelper>(Contracts.XulfxWebApiPerformance);
-			_helper.Init(instance);
+			//_helper = Xpcom.CreateInstance<nsIXulfxWEBAPIPerfomanceHelper>(Contracts.XulfxWebApiPerformance);
+			//_helper.Init(instance);
 		}
 
-		public nsIXulfxWEBAPIPerfomanceHelper Helper
-		{
-			get
-			{
-				if (_helper == null)
-					throw new ObjectDisposedException(this.GetType().Name);
-				return _helper;
-			}
-		}
+		//public nsIXulfxWEBAPIPerfomanceHelper Helper
+		//{
+		//	get
+		//	{
+		//		if (_helper == null)
+		//			throw new ObjectDisposedException(this.GetType().Name);
+		//		return _helper;
+		//	}
+		//}
 
 
-		public GeckoPerformanceTiming Timing
-		{
-			get { return Helper.GetTimingAttribute().Wrap(GeckoPerformanceTiming.Create); }
-		}
+		//public GeckoPerformanceTiming Timing
+		//{
+		//	get
+  //          {
+  //              return null;
+  //          }
+		//}
 
-		public GeckoPerformanceNavigation Navigation
-		{
-			get { return Helper.GetNavigationAttribute().Wrap(GeckoPerformanceNavigation.Create); }
-		}
+		//public GeckoPerformanceNavigation Navigation
+		//{
+		//	get
+  //          {
+  //              return null;
+  //          }
+		//}
 
 		/// <summary>
 		/// Returns the number of milliseconds, accurate to a thousandth of a millisecond,
@@ -56,7 +62,8 @@ namespace Gecko.WebAPI
 		/// </summary>
 		public double Now()
 		{
-			return Helper.Now();
+            return 0;
+			//return Helper.Now();
 		}
 
 		/// <summary>
@@ -65,17 +72,17 @@ namespace Gecko.WebAPI
 		/// <param name="name">Name associated with the performance mark.</param>
 		public void Mark(string name)
 		{
-			nsString.Set(Helper.Mark, name);
+			//nsString.Set(Helper.Mark, name);
 		}
 
 		public void ClearResourceTimings()
 		{
-			Helper.ClearResourceTimings();
+			//Helper.ClearResourceTimings();
 		}
 
 		public void SetResourceTimingBufferSize(uint maxSize)
 		{
-			Helper.SetResourceTimingBufferSize(maxSize);
+			//Helper.SetResourceTimingBufferSize(maxSize);
 		}
 
 

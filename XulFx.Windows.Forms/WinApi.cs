@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Gecko.Windows
 {
-	static class WinApi
+	public static class WinApi
 	{
 		public const int WS_OVERLAPPED = 0;
 		public const int WS_POPUP = unchecked((int)0x80000000);

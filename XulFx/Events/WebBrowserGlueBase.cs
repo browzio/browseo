@@ -14,7 +14,7 @@ namespace Gecko
 		nsISupportsWeakReference,
 		nsIDOMEventListener,
 		nsIInterfaceRequestor
-	{
+    {
 		private IntPtr _pUnknown;
 		private GeckoWeakReference _weakRef;
 		private long _maxProgressValue;
@@ -271,22 +271,22 @@ namespace Gecko
 					aRequest.Cancel(GeckoError.NS_BINDING_ABORTED);
 				}
 			}
-			#endregion STATE_REDIRECTING
+            #endregion STATE_REDIRECTING
 
-			#region STATE_TRANSFERRING
-			/* This flag indicates that data for a request is being transferred to an end consumer.
+            #region STATE_TRANSFERRING
+            /* This flag indicates that data for a request is being transferred to an end consumer.
 			 * This flag indicates that the request has been targeted, and that the user may start seeing content corresponding to the request.
 			 */
-			//else if ((aStateFlags & nsIWebProgressListenerConstants.STATE_TRANSFERRING) != 0)
-			//{
-			//}
-			#endregion STATE_TRANSFERRING
+            else if ((aStateFlags & nsIWebProgressListenerConsts.STATE_TRANSFERRING) != 0)
+            {
+            }
+            #endregion STATE_TRANSFERRING
 
-			#region STATE_STOP
-			/* This flag indicates the completion of a request.
+            #region STATE_STOP
+            /* This flag indicates the completion of a request.
 			 * The aStatus parameter to onStateChange() indicates the final status of the request.
 			 */
-			else if ((aStateFlags & nsIWebProgressListenerConsts.STATE_STOP) != 0)
+            else if ((aStateFlags & nsIWebProgressListenerConsts.STATE_STOP) != 0)
 			{
 				/* aStatus
 				 * Error status code associated with the state change.
@@ -418,60 +418,60 @@ namespace Gecko
 			return true;
 		}
 
-		#endregion nsIWebProgressListener2
+        #endregion nsIWebProgressListener2
 
-		#region nsIXULBrowserWindow
+        #region nsIXULBrowserWindow
 
-		public virtual void SetJSStatus(nsAStringBase status)
-		{
+        public virtual void SetJSStatus(nsAStringBase status)
+        {
+            status.SetData("");
 
-		}
+        }
 
-		public virtual void SetOverLink(nsAStringBase link, nsIDOMElement element)
-		{
+        public virtual void SetOverLink(nsAStringBase link, nsIDOMElement element)
+        {
 
-		}
+        }
 
-		public virtual void OnBeforeLinkTraversal(nsAStringBase originalTarget, nsIURI linkURI, nsIDOMNode linkNode, bool isAppTab, nsAStringBase retval)
-		{
-			retval.SetData(originalTarget.ToString());
-		}
+        public virtual void OnBeforeLinkTraversal(nsAStringBase originalTarget, nsIURI linkURI, nsIDOMNode linkNode, bool isAppTab, nsAStringBase retval)
+        {
+            retval.SetData(originalTarget.ToString());
+        }
 
-		public virtual void ShowTooltip(int x, int y, nsAStringBase tooltip, nsAStringBase direction)
-		{
+        public virtual void ShowTooltip(int x, int y, nsAStringBase tooltip, nsAStringBase direction)
+        {
 
-		}
+        }
 
-		public virtual void HideTooltip()
-		{
+        public virtual void HideTooltip()
+        {
 
-		}
+        }
 
-		public nsITabParent ForceInitialBrowserRemote()
-		{
-			throw new NotImplementedException();
-		}
+        public nsITabParent ForceInitialBrowserRemote()
+        {
+            return null;
+        }
 
-		public bool ShouldLoadURI(nsIDocShell aDocShell, nsIURI aURI, nsIURI aReferrer)
-		{
-			return true;
-		}
+        public bool ShouldLoadURI(nsIDocShell aDocShell, nsIURI aURI, nsIURI aReferrer)
+        {
+            return true;
+        }
 
-		public void ForceInitialBrowserNonRemote(mozIDOMWindowProxy openerWindow)
-		{
-			throw new NotImplementedException();
-		}
+        public void ForceInitialBrowserNonRemote(mozIDOMWindowProxy openerWindow)
+        {
+        }
 
-		public uint GetTabCount()
-		{
-			throw new NotImplementedException();
-		}
+        public uint GetTabCount()
+        {
+            throw new NotImplementedException();
+        }
 
-		#endregion nsIXULBrowserWindow
+        #endregion nsIXULBrowserWindow
 
-		#region nsIDOMEventListener
+        #region nsIDOMEventListener
 
-		public virtual void HandleEvent(nsIDOMEvent @event)
+        public virtual void HandleEvent(nsIDOMEvent @event)
 		{
 			RaiseDOMEvent(Xpcom.QueryInterface<nsIDOMEvent>(@event).Wrap(GeckoDOMEventArgs.Create));
 		}

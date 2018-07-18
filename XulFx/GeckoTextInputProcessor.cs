@@ -17,7 +17,7 @@ namespace Gecko
 
 		private GeckoTextInputProcessor(nsITextInputProcessor instance)
 			: base(instance)
-		{
+	{
 
 		}
 

@@ -7,8 +7,9 @@ using System.Linq;
 using Gecko.Interfaces;
 using Gecko.Interop;
 using System.Runtime.InteropServices;
+using Gecko;
 
-namespace Gecko
+namespace Old.Gecko
 {
 	/// <summary>
 	/// Provides access to Gecko preferences.
@@ -21,7 +22,7 @@ namespace Gecko
 
 		#region static members
 
-		private static ComObject<nsIPrefService> PrefService
+		public static ComObject<nsIPrefService> PrefService
 		{
 			get { return _prefService ?? (_prefService = new ComObject<nsIPrefService>(Xpcom.GetService<nsIPrefService>(Contracts.PreferencesService))); }
 		}

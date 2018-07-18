@@ -200,13 +200,14 @@ namespace Gecko
 						View.OnDOMWindowCreated(e);
 						break;
 					case "DOMWindowClose":
-						WindowlessWebView view = this.View;
-						view.OnWindowClose(e);
-						if (view._disposing || !e.GetDefaultPrevented)
-						{
-							view.IsDead = true;
-							view.OnWindowClosed(e);
-						}
+                        //WindowlessWebView view = this.View;
+                        //view.OnWindowClose(e);
+                        //if (view._disposing || !e.GetDefaultPrevented)
+                        //{
+                        //	view.IsDead = true;
+                        //	view.OnWindowClosed(e);
+                        //}
+                        int i = 0;
 						break;
 				}
 
@@ -229,11 +230,11 @@ namespace Gecko
 				View.OnCreateWindow(e);
 			}
 
-			public override void OnBeforeLinkTraversal(nsAStringBase originalTarget, nsIURI linkURI, nsIDOMNode linkNode, bool isAppTab, nsAStringBase retval)
-			{
-				retval.SetData(View.BeforeLinkTraversal(originalTarget.ToString(), linkURI, linkNode, isAppTab));
-			}
-		}
+            public override void OnBeforeLinkTraversal(nsAStringBase originalTarget, nsIURI linkURI, nsIDOMNode linkNode, bool isAppTab, nsAStringBase retval)
+            {
+                retval.SetData(View.BeforeLinkTraversal(originalTarget.ToString(), linkURI, linkNode, isAppTab));
+            }
+        }
 
 	}
 }

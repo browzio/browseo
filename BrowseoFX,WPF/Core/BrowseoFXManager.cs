@@ -147,15 +147,18 @@ namespace BrowseoFX_WPF.Core
 
         public async Task Init()
         {
-
-//#if DEBUG
-//            SetPersonData();
-//#endif
-
-
             var binDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\firefox-sdk\\bin";
+            //var binDirectory = @"C:\Users\eli\Desktop\move\xilium-xilium.cefglue-335450e6011d\BrowserAndFeatures\bin\x86\Debug" + "\\firefox-sdk\\bin";
             Xpcom.SDKDirectory = binDirectory;
             Xpcom.BFXComponentsDirectory = Path.Combine(binDirectory, "browser", "BFXComponents");
+
+////#if DEBUG
+//            SetPersonData();
+////#endif
+
+
+            
+
 
             if (GloableProfData.PData == null)
             {
@@ -269,8 +272,8 @@ namespace BrowseoFX_WPF.Core
                     ////"XulFx.xpi"
                     Xpcom.LoadExtension(BFXComponentsDirectory, "components.manifest");
 
-                    BFXMacrosDirectory = Path.Combine(binDirectory, "Imacros 8", "src");
-                    Xpcom.LoadExtension(BFXMacrosDirectory, "chrome.manifest");
+                BFXMacrosDirectory = Path.Combine(binDirectory, "Imacros 8", "src");
+                Xpcom.LoadExtension(BFXMacrosDirectory, "chrome.manifest");
 
 
 
@@ -297,6 +300,7 @@ namespace BrowseoFX_WPF.Core
 
                 //Xpcom.RegisterInstance(typeof(nsISessionStore).GUID, "SessionStore", "@mozilla.org/browser/sessionstore;1", FXServices.SessionStoreService);
 
+                FXServices.ObserverService.AddObserver(new nsObserverAny(), "browserClassInitializer_12345", false);
                 FXServices.ObserverService.AddObserver(new nsObserverAny(), "browserClassInitializer_12345", false);
 
                 Xpcom.RegisterInstance(typeof(nsIWinTaskbar).GUID, "WinTaskbar", "@mozilla.org/windows-taskbar;1", nsWinTaskbar.Instance);
@@ -946,7 +950,14 @@ namespace BrowseoFX_WPF.Core
                 {
                     OnReadyToBrowse();
                 }
+                
 
+                ////nsINavBookmarksService prefService = Xpcom.GetService<nsINavBookmarksService>(typeof(nsINavBookmarksService).GUID);
+                //int i = 0;
+
+                //using (var TransportService = Xpcom.GetService2<Gecko.Interfaces.nsISupports>(typeof(nsINavBookmarksService).GUID))
+                //{
+                //}
                 //System.Timers.Timer t = new System.Timers.Timer(60000);
                 //t.Elapsed += T_Elapsed;
                 //t.Start();

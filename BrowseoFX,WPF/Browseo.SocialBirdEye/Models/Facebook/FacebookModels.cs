@@ -1586,6 +1586,8 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Models.Facebook
 
     //live_videos{id,status,title,permalink_url,live_views}
     //video_broadcasts{id,status,title,permalink_url,live_views}
+    //https://developers.facebook.com/docs/graph-api/reference/live-video/
+    //user_videos or user_posts
     public class live_videosData
     {
         public string id { get; set; }
@@ -1602,7 +1604,8 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Models.Facebook
     }
 
     //likes{name,id,created_time,talking_about_count,fan_count,link,overall_star_rating,rating_count,website,category}
-    //TODO: video_broadcasts
+    //https://developers.facebook.com/docs/graph-api/reference/user/likes/
+    //user_likes
     public class likesData
     {
         public string created_time { get; set; }

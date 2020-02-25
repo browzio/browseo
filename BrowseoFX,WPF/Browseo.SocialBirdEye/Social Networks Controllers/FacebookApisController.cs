@@ -127,22 +127,29 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Social_Networks_Controllers
                     var page_activity = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_content_activity_by_action_type,page_content_activity_by_action_type_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_content_activity_by_action_type",
+                            "page_content_activity_by_action_type_unique"
+                        }),
                         account.access_token);
                     var page_activity_by = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsPageStoryType>>>(url);
 
                     //Page Impressions
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_impressions" + "," +
-                        "page_impressions_unique" + "," +
-                        "page_impressions_paid" + "," +
-                        "page_impressions_paid_unique" + "," +
-                        "page_impressions_organic" + "," +
-                        "page_impressions_organic_unique" + "," +
-                        "page_impressions_viral" + "," +
-                        "page_impressions_viral_unique" + "," +
-                        "page_impressions_nonviral" + "," +
-                        "page_impressions_nonviral_unique",
+                        string.Join(",", new string[] 
+                        {
+                            "page_impressions",
+                            "page_impressions_unique",
+                            "page_impressions_paid",
+                            "page_impressions_paid_unique",
+                            "page_impressions_organic",
+                            "page_impressions_organic_unique",
+                            "page_impressions_viral",
+                            "page_impressions_viral_unique",
+                            "page_impressions_nonviral",
+                            "page_impressions_nonviral_unique"
+                        }),
                         account.access_token);
                     var page_impressions = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
@@ -153,62 +160,85 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Social_Networks_Controllers
 
                     //Page Engagement
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_engaged_users" + "," +
-                        "page_post_engagements" + "," +
-                        "page_consumptions" + "," +
-                        "page_consumptions_unique" + "," +
-                        "page_places_checkin_total" + "," + 
-                        "page_places_checkin_total_unique" + "," +
-                        "page_negative_feedback" + "," +
-                        "page_negative_feedback_unique" + "," +
-                        "page_fans_online_per_day",
+                        string.Join(",", new string[] 
+                        {
+                            "page_engaged_users",
+                            "page_post_engagements",
+                            "page_consumptions",
+                            "page_consumptions_unique",
+                            "page_places_checkin_total",
+                            "page_places_checkin_total_unique",
+                            "page_negative_feedback",
+                            "page_negative_feedback_unique",
+                            "page_fans_online_per_day"
+                        }),
                         account.access_token);
                     var page_engagement = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_negative_feedback_by_type,page_negative_feedback_by_type_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_negative_feedback_by_type",
+                            "page_negative_feedback_by_type_unique"
+                        }),
                         account.access_token);
                     var page_engagement_neg = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<NegativeFeedbackType>>>(url);
 
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_positive_feedback_by_type,page_positive_feedback_by_type_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_positive_feedback_by_type",
+                            "page_positive_feedback_by_type_unique"
+                        }),
                         account.access_token);
                     var page_engagement_pos = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<PositiveFeedbackType>>>(url);
 
                     //Page Reactions
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_actions_post_reactions_like_total" + "," +
-                        "page_actions_post_reactions_love_total" + "," +
-                        "page_actions_post_reactions_wow_total" + "," +
-                        "page_actions_post_reactions_haha_total" + "," +
-                        "page_actions_post_reactions_sorry_total" + "," +
-                        "page_actions_post_reactions_anger_total",
+                        string.Join(",", new string[]
+                        {
+                            "page_actions_post_reactions_like_total",
+                            "page_actions_post_reactions_love_total",
+                            "page_actions_post_reactions_wow_total",
+                            "page_actions_post_reactions_haha_total",
+                            "page_actions_post_reactions_sorry_total",
+                            "page_actions_post_reactions_anger_total"
+                        }),
                         account.access_token);
                     var page_reactions = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     //Page CTA Clicks
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_total_actions" + "," +
-                        "page_website_clicks_logged_in_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_total_actions",
+                            "page_website_clicks_logged_in_unique",
+                        }),
                         account.access_token);
                     var page_cta = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     //Page User Demographics
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_fans" + "," +
-                        "page_fan_adds" + "," +
-                        "page_fan_adds_unique" + "," +
-                        "page_fan_removes" + "," +
-                        "page_fan_removes_unique" + "," +
-                        "page_actions_post_reactions_sorry_total" + "," +
-                        "page_website_clicks_logged_in_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_fans",
+                            "page_fan_adds",
+                            "page_fan_adds_unique",
+                            "page_fan_removes",
+                            "page_fan_removes_unique",
+                            "page_actions_post_reactions_sorry_total",
+                            "page_website_clicks_logged_in_unique"
+                        }),
                         account.access_token);
                     var page_demographics = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
 
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_fans_by_like_source" + "," +
-                        "page_fans_by_like_source_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_fans_by_like_source",
+                            "page_fans_by_like_source_unique"
+                        }),
                         account.access_token);
                     var page_demographics_like_source = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<LikeSourceType>>>(url);
 
@@ -219,39 +249,48 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Social_Networks_Controllers
                     //696763390481869/insights?pretty=0&since=1481815715&until=1489591715&metric=page_views_total
                     //696763390481869/insights?pretty=0&since=1529509688&until=1531612800&metric=page_views_total
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_views_total" + "," +
-                        "page_views_logout" + "," +
-                        "page_views_logged_in_total" + "," +
-                        "page_views_logged_in_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_views_total",
+                            "page_views_logout",
+                            "page_views_logged_in_total",
+                            "page_views_logged_in_unique"
+                        }),
                         account.access_token);
                     var page_views = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     //Page Video Views
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_video_views" + "," +
-                        "page_video_views_paid" + "," +
-                        "page_video_views_organic" + "," +
-                        "page_video_views_autoplayed" + "," +
-                        "page_video_views_click_to_play" + "," +
-                        "page_video_views_unique" + "," +
-                        "page_video_repeat_views" + "," +
-                        "page_video_view_time",
+                        string.Join(",", new string[]
+                        {
+                            "page_video_views",
+                            "page_video_views_paid",
+                            "page_video_views_organic",
+                            "page_video_views_autoplayed",
+                            "page_video_views_click_to_play",
+                            "page_video_views_unique",
+                            "page_video_repeat_views",
+                            "page_video_view_time"
+                        }),
                         account.access_token);
                     var page_video_views = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
                     //Page Posts
                     url = buildInsitesRequestUrl(account.id + "/" + FBRequests.Endpoint_insights,
-                        "page_posts_impressions" + "," +
-                        "page_posts_impressions_unique" + "," +
-                        "page_posts_impressions_paid" + "," +
-                        "page_posts_impressions_paid_unique" + "," +
-                        "page_posts_impressions_organic" + "," +
-                        "page_posts_impressions_organic_unique" + "," +
-                        "page_posts_served_impressions_organic_unique" + "," +
-                        "page_posts_impressions_viral" + "," +
-                        "page_posts_impressions_viral_unique" + "," +
-                        "page_posts_impressions_nonviral" + "," +
-                        "page_posts_impressions_nonviral_unique",
+                        string.Join(",", new string[]
+                        {
+                            "page_posts_impressions",
+                            "page_posts_impressions_unique",
+                            "page_posts_impressions_paid",
+                            "page_posts_impressions_paid_unique",
+                            "page_posts_impressions_organic",
+                            "page_posts_impressions_organic_unique",
+                            "page_posts_served_impressions_organic_unique",
+                            "page_posts_impressions_viral",
+                            "page_posts_impressions_viral_unique",
+                            "page_posts_impressions_nonviral",
+                            "page_posts_impressions_nonviral_unique"
+                        }),
                         account.access_token);
                     var page_posts_impressions = await HttpRequestsBase.GetUrlRequest<DefaultDataResponse<InsightsResultBase<InsightsValue>>>(url);
 
@@ -296,7 +335,7 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Social_Networks_Controllers
             }
         }
 
-        private string buildInsitesRequestUrl(string endpoint, string metrics, string page_acces_token, string since = "", string until = "")
+        private string buildInsitesRequestUrl(string endpoint, string metrics, string page_acces_token, int since = 0, int until = 0)
         {
             string url = 
                 FBRequests.DefaultOgRequestUrl +
@@ -304,8 +343,8 @@ namespace BrowseoFX_WPF.Browseo.SocialBirdEye.Social_Networks_Controllers
                 "?metric=" + metrics + 
                 "&access_token=" + page_acces_token;
 
-            if (since != "" &&
-                until != "")
+            if (since != 0 &&
+                until != 0)
             {
                 url =
                     FBRequests.DefaultOgRequestUrl +

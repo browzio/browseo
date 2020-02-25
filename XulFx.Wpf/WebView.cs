@@ -184,6 +184,12 @@ namespace Gecko.Windows
             _widget.SetPosition(0, 0);
             Gecko.Windows.NativeMethods.ShowWindow(hwndView, WinApi.SW_SHOWNA);
 
+
+            RedrawWindow(hwndParent.Handle, IntPtr.Zero, IntPtr.Zero,
+                RDW_ERASENOW |
+                RDW_ALLCHILDREN |
+                RDW_INVALIDATE);
+
             //set window background
             //var result = NativeMethods.SetClassLong(hwndParent.Handle, NativeMethods.GCL_HBRBACKGROUND, NativeMethods.GetSysColorBrush(NativeMethods.COLOR_WINDOW));
 
@@ -197,6 +203,28 @@ namespace Gecko.Windows
             // var c = HwndSource.FromHwnd(HandleRef.ToIntPtr(href));
             return href;
         }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate,
+          IntPtr hrgnUpdate, uint flags);
+
+        const int RDW_INVALIDATE = 0x0001;
+        const int RDW_INTERNALPAINT = 0x0002;
+        const int RDW_ERASE = 0x0004;
+
+        const int RDW_VALIDATE = 0x0008;
+        const int RDW_NOINTERNALPAINT = 0x0010;
+        const int RDW_NOERASE = 0x0020;
+
+        const int RDW_NOCHILDREN = 0x0040;
+        const int RDW_ALLCHILDREN = 0x0080;
+
+        const int RDW_UPDATENOW = 0x0100;
+        const int RDW_ERASENOW = 0x0200;
+
+        const int RDW_FRAME = 0x0400;
+        const int RDW_NOFRAME = 0x0800;
 
         protected override void DestroyWindowCore(System.Runtime.InteropServices.HandleRef hwnd)
 		{

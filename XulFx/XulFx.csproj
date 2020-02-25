@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gecko</RootNamespace>
     <AssemblyName>XulFx</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -76,14 +76,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.DwayneNeed">
-      <HintPath>..\..\..\..\..\..\..\..\..\Downloads\MicrosoftDwayneNeed\sourceCode\sourceCode\Microsoft.DwayneNeed\Microsoft.DwayneNeed\bin\Debug\Microsoft.DwayneNeed.dll</HintPath>
+      <HintPath>..\..\..\dlls\Microsoft.DwayneNeed.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.DwayneNeed.Win32">
-      <HintPath>..\..\..\..\..\..\..\..\..\Downloads\MicrosoftDwayneNeed\sourceCode\sourceCode\Microsoft.DwayneNeed\Microsoft.DwayneNeed.Win32\bin\Debug\Microsoft.DwayneNeed.Win32.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\dlls\Microsoft.DwayneNeed.Win32.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -3573,7 +3569,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set PATH="$(SolutionDir)packages/7-Zip.CommandLine.9.20.0/tools"
+    <PostBuildEvent>set PATH="$(SolutionDir)packages/7-Zip.CommandLine.18.1.0/tools"
 7za a -tzip "$(TargetDir)$(TargetName).xpi" "$(ProjectDir)XPI/Content/*"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

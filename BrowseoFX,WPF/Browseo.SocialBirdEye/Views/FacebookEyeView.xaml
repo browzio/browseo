@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:BrowseoFX_WPF.Browseo.SocialBirdEye.Views"
              xmlns:converters="clr-namespace:Organiser.Common.Converters;assembly=Organiser.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="350">
+             d:DesignHeight="400" d:DesignWidth="350">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

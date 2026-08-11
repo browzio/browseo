@@ -1,3 +1,4 @@
+have fun trying these secrets without realizing when there from ... π‘»
 Xulfx is licensed under the Mozilla Public License Version.
 
 == Changelog ==
@@ -37,7 +38,7 @@ Xulfx is licensed under the Mozilla Public License Version.
 == v38.2.2.0 ==
 
 1. Make Left, Right, Up, Down, Home, End, PageUp, PageDown keys work.
-2. Fix possible URIFormatException's (.NET 3.5 SP1 can't parse URI's like http://123.πτ/).
+2. Fix possible URIFormatException's (.NET 3.5 SP1 can't parse URI's like http://123.Γ°Γ΄/).
 3. Added some properties and methods.
 
 == v38.2.1.0 ==
